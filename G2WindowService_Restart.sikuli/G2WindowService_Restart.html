@@ -1,0 +1,160 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>G2WindowService_Restart.sikuli</h2> <a href="G2WindowService_Restart.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> random
+<span class="kw">import</span> string
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> RanTime():    <span class="cmt">#random 시간</span>
+    ran = <span class="str">""</span>.join([random.choice(string.digits)])
+    s=int(ran)
+    <span class="skw">wait</span>(s)
+
+<span class="kw">def</span> Time():    <span class="cmt">#get current time</span>
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):     <span class="cmt">#result log</span>
+    <span class="kw">global</span> cnt
+
+    cntstr =str(cnt)
+    statusStr = str(status)
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> cnt==<span class="dig">0</span>:
+        f.write(s+<span class="str">"    "</span>+<span class="str">" start\n"</span>)
+        f.close()
+        cnt = cnt + <span class="dig">1</span>
+    <span class="kw">else</span>:
+        <span class="kw">if</span> flag==errorConst.no_error:
+            f.write(s+<span class="str">"    "</span>+statusStr+<span class="str">"    "</span>+cntstr+<span class="str">" pass\n"</span>)
+            f.close()
+
+        <span class="kw">else</span>:
+            f.write(s+<span class="str">"    "</span>+statusStr+<span class="str">"    "</span>+cntstr+<span class="str">" fail\n"</span>)
+            f.close()
+<span class="kw">def</span> keyHold(key1,key2):
+    keyDown(key1)
+    <span class="skw">type</span>(key2)
+    keyUp(key1)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> type_Enter(str1):
+    <span class="skw">type</span>(str1)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> Restart():
+    <span class="kw">global</span> cnt
+    <span class="kw">global</span> status
+
+<span class="cmt">#    G2WindwosPath = 'C:\"IDIS Solution Suite"\Server\ServiceManager.exe '</span>
+<span class="cmt">#    strPath=str(G2WinidowsPath)</span>
+    keyHold(Key.WIN,<span class="str">"r"</span>)
+    type_Enter(<span class="str">"cmd"</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">0</span>,<span class="dig">2</span>,<span class="dig">1</span>):
+        type_Enter(<span class="str">"cd.."</span>)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+    type_Enter(<span class="str">'cd "IDIS Solution Suite"\Server"'</span>)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> status == errorConst.Running:
+            type_Enter(<span class="str">'G2WindowService.exe stop'</span>)
+            status = errorConst.Stopping
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            Log(<span class="str">"G2WindowRestart"</span>,<span class="str">'a'</span>,errorConst.no_error)
+            <span class="skw">wait</span>(<span class="dig">240</span>)
+
+        <span class="kw">else</span>:
+            type_Enter(<span class="str">'G2WindowService.exe start'</span>)
+            status =errorConst.Running
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            Log(<span class="str">"G2WindowRestart"</span>,<span class="str">'a'</span>,errorConst.no_error)
+            <span class="skw">wait</span>(<span class="dig">240</span>)
+        cnt = cnt + <span class="dig">1</span>
+<span class="cmt">#    type_Enter("stop")</span>
+
+<span class="kw">try</span> :
+    <span class="kw">global</span> cnt
+    <span class="kw">global</span> status
+    status = errorConst.Running
+    cnt = <span class="dig">0</span>
+    Log(<span class="str">"G2WindowRestart"</span>,<span class="str">'w'</span>,errorConst.no_error)
+    Restart()
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"G2WindowRestart"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

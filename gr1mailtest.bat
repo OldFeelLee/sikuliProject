@@ -1,0 +1,1 @@
+gr1mailer.exe --recipients "leehunpill@idis.co.kr" --title "Test Result" --contents " " --contents-file "C:\sikuli\DBExport.txt" --name "sikuli" --smtp-addr gw.idis.co.kr

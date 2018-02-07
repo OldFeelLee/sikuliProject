@@ -79,7 +79,7 @@ try :
     global status
     status = errorConst.Running
     cnt = 0
-    Log("G2WindowRestart",'w',errorConst.no_error)     
+    Log("CDM_RunTest",'w',errorConst.no_error)     
     Restart()
 except FindFailed:
-    Log("G2WindowRestart",'a',errorConst.error_1) 
+    Log("CDM_RunTest",'a',errorConst.error_1) 

@@ -1,0 +1,180 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>STM_PTZ.sikuli</h2> <a href="STM_PTZ.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> random
+<span class="kw">import</span> string
+
+        <span class="cmt">#Pattern("direction_0.png").exact()Pattern("direction_1.png").exact()Pattern("direction_2.png").exact()Pattern("direction_3.png").exact()</span>
+
+<span class="kw">def</span> RanTime():    <span class="cmt">#random 시간</span>
+    ran = <span class="str">""</span>.join([random.choice(string.digits)])
+    s=int(ran)
+    <span class="skw">wait</span>(s)
+
+<span class="kw">def</span> Time():    <span class="cmt">#get current time</span>
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):     <span class="cmt">#result log</span>
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+
+
+
+<span class="kw">def</span> PTZ_preset():    <span class="cmt">#preset move</span>
+    <span class="skw">click</span>(Pattern(<img src="1487063976947.png" />).similar(<span class="dig">0.84</span>))
+    <span class="skw">click</span>(<img src="1487063994364.png" />)
+    <span class="skw">click</span>(<img src="1487064048721.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1487147768015.png" />)
+
+<span class="kw">def</span> imageFind(image):    <span class="cmt">#image compare</span>
+    <span class="kw">if</span> exists(image):
+        Time()
+        f=open(<span class="str">"c:/a/install.txt"</span>,<span class="str">'a'</span>)
+        f.write(s+<span class="str">"    ok!\n"</span>)
+        f.close()
+
+
+
+<span class="kw">def</span> PresetCheck(image):    <span class="cmt">#PTZ Action(short/Long)with image compare</span>
+    <span class="kw">for</span> b <span class="kw">in</span> range(<span class="dig">0</span>,<span class="dig">4</span>,<span class="dig">1</span>):
+        PTZ_short(<img src="direction_%s.png" /> %(b))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="kw">if</span> exists(image):
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            PTZ_preset()
+            <span class="skw">wait</span>(<span class="dig">5</span>)
+            imageFind(image)
+        PTZ_long(<img src="direction_%s.png" /> %(b))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="kw">if</span> exists(image):
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            PTZ_preset()
+            <span class="skw">wait</span>(<span class="dig">5</span>)
+            imageFind(image)
+
+<span class="kw">def</span> PTZ_short(image):    <span class="cmt">#PTZ short action</span>
+    <span class="skw">click</span>(image)
+    RanTime()
+
+<span class="kw">def</span> PTZ_long(image):    <span class="cmt">#PTZ long action</span>
+    hover(image)
+    mouseDown(Button.LEFT)
+    RanTime()
+    mouseUp(Button.LEFT)
+    RanTime()
+
+
+<span class="kw">def</span> Client_PTZ():    <span class="cmt">#main</span>
+    <span class="kw">global</span> status
+    status = <span class="str">"Client focus"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Client"</span>)
+    status = <span class="str">"Client Init"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Client_Loading"</span>)
+    <span class="skw">click</span>(<img src="1487041638105-1.png" />)
+    status = <span class="str">"Device DragDrop"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Client_Device_DragDrop"</span>)
+    <span class="skw">rightClick</span>()
+    <span class="skw">click</span>(<img src="1487063512377.png" />)
+
+
+    <span class="skw">click</span>(<img src="1487063527153.png" />)
+<span class="cmt">#    PresetCheck("1487064164064.png")</span>
+<span class="cmt">#    PresetCheck(Pattern("1487140889600.png").similar(0.94))</span>
+    PresetCheck(Pattern(<img src="1487143148467.png" />).similar(<span class="dig">0.90</span>))
+<span class="cmt">#    PresetCheck(Pattern("1487205652187.png").exact())</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\PaneClear"</span>)
+
+<span class="kw">try</span> :
+
+    Client_PTZ()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

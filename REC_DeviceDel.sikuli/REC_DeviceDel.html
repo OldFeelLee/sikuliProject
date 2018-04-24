@@ -1,0 +1,129 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>REC_DeviceDel.sikuli</h2> <a href="REC_DeviceDel.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> string
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> currentTime
+<span class="kw">import</span> fileLog
+<span class="kw">import</span> clickFunc
+<span class="kw">import</span> existsFunc
+<span class="kw">import</span> ConfTool
+
+
+
+<span class="kw">def</span> REC_DeviceDel():
+    <span class="kw">while</span> True:
+
+        <span class="skw">doubleClick</span>(Pattern(<img src="1521075002526.png" />).similar(<span class="dig">0.83</span>))
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        clickFunc.click_click(Pattern(<img src="1521075039928.png" />).similar(<span class="dig">0.91</span>),Pattern(<img src="1521075067474.png" />).similar(<span class="dig">0.88</span>))
+        <span class="skw">type</span>(<span class="str">"_56"</span>)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        <span class="kw">if</span> exists(Pattern(<img src="1521075253312.png" />).similar(<span class="dig">0.88</span>)):
+            fileLog.status = <span class="str">"rec_Del"</span>
+            clickFunc.click_click(Pattern(<img src="1521075253312.png" />).similar(<span class="dig">0.88</span>),Pattern(<img src="1521075297394.png" />).similar(<span class="dig">0.82</span>))
+            <span class="skw">wait</span>(<span class="dig">2</span>)
+            clickFunc.click_wait_click(<img src="1521075324374.png" />,<img src="1521075339832.png" />,<span class="dig">20</span>)
+            <span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="1521075918737.png" />).similar(<span class="dig">0.81</span>)):
+                fileLog.Log_flagCheck(<span class="str">"REC_DeviceDel_04.23-04.30"</span>,<span class="str">'a'</span>,errorConst.no_error)
+            <span class="kw">else</span>:
+                fileLog.Log_flagCheck(<span class="str">"REC_DeviceDel_04.23-04.30"</span>,<span class="str">'a'</span>,errorConst.error_1)
+                <span class="kw">break</span>
+
+        <span class="kw">else</span>:
+            fileLog.status = <span class="str">"rec_Add"</span>
+            clickFunc.click_click(<img src="1521075591041.png" />,Pattern(<img src="1521075599238.png" />).targetOffset(-<span class="dig">9</span>,-<span class="dig">11</span>))
+            clickFunc.click_wait_click(<img src="1521075324374.png" />,<img src="1521075339832.png" />,<span class="dig">20</span>)
+            <span class="skw">wait</span>(<span class="dig">20</span>)
+            <span class="kw">if</span> exists(Pattern(<img src="1521082064448.png" />).similar(<span class="dig">0.90</span>)):
+                fileLog.Log_flagCheck(<span class="str">"REC_DeviceDel_04.23-04.30"</span>,<span class="str">'a'</span>,errorConst.no_error)
+            <span class="kw">else</span>:
+                fileLog.Log_flagCheck(<span class="str">"REC_DeviceDel_04.23-04.30"</span>,<span class="str">'a'</span>,errorConst.error_1)
+                <span class="kw">break</span>
+
+
+<span class="kw">try</span>:
+    fileLog.cnt = <span class="dig">0</span>
+    fileLog.status = None
+    ConfTool.Open()
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(Pattern(<img src="1521075002526.png" />).similar(<span class="dig">0.83</span>)):
+            REC_DeviceDel()
+        <span class="kw">else</span>:
+            ConfTool.Open()
+            REC_DeviceDel()
+<span class="kw">except</span> FindFailed:
+    fileLog.Log_flagCheck(<span class="str">"REC_DeviceDel_04.23-04.30"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>cllipCopy.sikuli</h2> <a href="cllipCopy.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> string
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> currentTime
+<span class="kw">import</span> fileLog
+<span class="kw">import</span> clickFunc
+<span class="kw">import</span> existsFunc
+<span class="kw">import</span> os
+<span class="kw">import</span> glob
+
+<span class="kw">def</span> clipCopy():
+    clipCount = <span class="dig">0</span>
+    device = <span class="skw">find</span>(Pattern(<img src="1522026468764.png" />).similar(<span class="dig">0.94</span>))
+    pane = <span class="skw">find</span>(<img src="1522026485828.png" />)
+
+    <span class="kw">while</span> True:
+        os.chdir(<span class="str">"c:\sikuliLog"</span>)
+        <span class="skw">dragDrop</span>(device,pane)
+        <span class="skw">wait</span>(<span class="dig">10</span>)
+        existsFunc.exists_click_click(Pattern(<img src="1522026553170.png" />).similar(<span class="dig">0.94</span>),<img src="1522026628143.png" />,Pattern(<img src="1522029813911.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">12</span>))
+        clickFunc.click_click(Pattern(<img src="1522026653106.png" />).targetOffset(-<span class="dig">12</span>,<span class="dig">0</span>),<img src="1522026673584.png" />)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        clickFunc.click_wait_click(<img src="1522026720780.png" />,<img src="1522026730394.png" />,<span class="dig">5</span>)
+        <span class="skw">wait</span>(<img src="1522026752652.png" />,<span class="dig">60</span>)
+        existsFunc.exists_click_click(<img src="1522026752652.png" />,<img src="1522026755408.png" />,<img src="1522026766617.png" />)
+        <span class="skw">rightClick</span>(pane)
+        clickFunc.click_wait_click(<img src="1522031018067.png" />,<img src="1522031028264.png" />,<span class="dig">5</span>)
+        fileLog.Log(<span class="str">"clipCopy_03.26-04.02"</span>,<span class="str">'a'</span>,errorConst.no_error)
+        <span class="skw">wait</span>(<span class="dig">30</span>)
+        clipCount=clipCount +<span class="dig">1</span>
+        <span class="kw">if</span> clipCount&gt;=<span class="dig">60</span>:
+
+            os.chdir(<span class="str">"E:\clip"</span>)
+            files = glob.glob(<span class="str">"*.exe"</span>)
+            <span class="kw">for</span> a <span class="kw">in</span> files:
+                os.remove(a)
+                <span class="skw">wait</span>(<span class="dig">60</span>)
+
+<span class="kw">try</span>:
+
+    fileLog.cnt = <span class="dig">0</span>
+    fileLog.status = None
+    clipCopy()
+<span class="kw">except</span> FindFailed:
+    fileLog.Log(<span class="str">"clipCopy_03.26-04.02"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

@@ -8,3 +8,6 @@ Full = 5
 Part = 6  
 Running = "Running"
 Stopping = "Stopping"
+
+Disable = 0
+Enable = 1

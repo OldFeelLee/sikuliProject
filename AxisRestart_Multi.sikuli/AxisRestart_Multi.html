@@ -1,0 +1,219 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>AxisRestart_Multi.sikuli</h2> <a href="AxisRestart_Multi.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    <span class="kw">global</span> cnt
+    statusStr=str(status)
+    cntstr=str(cnt)
+
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> cnt ==<span class="dig">0</span>:
+        f.write(s+<span class="str">"    "</span>+<span class="str">" start\n"</span>)
+        f.close()
+        cnt = cnt + <span class="dig">1</span>
+    <span class="kw">else</span>:
+<span class="cmt">#        if flagCheck==int(flag): </span>
+        <span class="kw">if</span> int(flag) == errorConst.no_error:
+            f.write(s+<span class="str">"    "</span>+cntstr+<span class="str">"    "</span>+deviceNum+<span class="str">"\n"</span>)
+            f.close()
+            <span class="skw">wait</span>(<span class="dig">2</span>)
+        <span class="kw">else</span>:
+            f.write(s+<span class="str">"    "</span>+<span class="str">"    "</span>+cntstr+<span class="str">"    "</span>+deviceNum+<span class="str">"    "</span>+statusStr+<span class="str">" fail\n"</span>)
+            f.close()
+<span class="kw">def</span> waitClick(img1):
+    <span class="skw">wait</span>(img1,<span class="dig">300</span>)
+    <span class="skw">click</span>(img1)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> exists_click(img,time):
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">if</span> exists(img,time):
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(img)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+<span class="kw">def</span> type_type(str1):
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.F6)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"http://10.0.127."</span>+str1+<span class="str">"/admin/maintenance.shtml?id=41"</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+<span class="cmt">#AddressFocus "1515119506911.png"</span>
+
+<span class="kw">def</span> refresh():
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.F6+<span class="str">"http://10.0.127."</span>+ipArr[i])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> tabMove():
+    keyDown(Key.CTRL)
+    <span class="skw">type</span>(Key.TAB)
+    keyUp(Key.CTRL)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> setupMove():
+    <span class="kw">global</span> status
+    status = <span class="str">"setupMove"</span>
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    exists_click(<img src="1515128420974.png" />,<span class="dig">5</span>)
+    type_type(ipArr[i])
+<span class="cmt">#    hover(Pattern("1515147248753.png").similar(0.84))</span>
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    exists_click(<img src="1515128420974.png" />,<span class="dig">5</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+
+<span class="kw">def</span> Restart():
+    <span class="kw">global</span> cnt
+    <span class="kw">global</span> status
+    <span class="kw">global</span> deviceNum
+    <span class="kw">global</span> ipArr
+    <span class="kw">global</span> i
+    <span class="kw">global</span> status
+  <span class="cmt">#  m1113 = find("1515053209298.png") </span>
+<span class="cmt">#    m1114 = "1515119386897.png"</span>
+<span class="cmt">#    m1124 = "1515119692140.png"</span>
+<span class="cmt">#    m5014 = "1515119867730.png"</span>
+<span class="cmt">#    q1604 = "1515120098650.png"</span>
+<span class="cmt">#    modelArr = ["m1113","m1113","m1113","m1113","m1113","m1114","m1114","m1124","m5014","q1604"]</span>
+<span class="cmt">#    ipArr = ["57","52","51","53","56","67","64","81","180","189"]    </span>
+    ipArr = [<span class="str">"57"</span>,<span class="str">"52"</span>,<span class="str">"51"</span>,<span class="str">"53"</span>,<span class="str">"56"</span>,<span class="str">"67"</span>,<span class="str">"64"</span>,<span class="str">"81"</span>,<span class="str">"189"</span>,<span class="str">"199"</span>]
+    <span class="kw">while</span> True:
+        <span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">0</span>,<span class="dig">10</span>,<span class="dig">1</span>):
+            device = i
+            deviceNum = str(device)
+            exists_click(<img src="1515128420974.png" />,<span class="dig">5</span>)
+            <span class="kw">if</span> exists(<img src="1515119506911.png" />,<span class="dig">360</span>):
+                setupMove()
+                status = <span class="str">"restart page"</span>
+                <span class="kw">if</span> exists(Pattern(<img src="1515052974538.png" />).similar(<span class="dig">0.85</span>).targetOffset(-<span class="dig">28</span>,-<span class="dig">1</span>),<span class="dig">360</span>):
+                    <span class="skw">click</span>(Pattern(<img src="1515052974538.png" />).similar(<span class="dig">0.85</span>).targetOffset(-<span class="dig">28</span>,-<span class="dig">1</span>))
+                    waitClick(<img src="1515052998986.png" />)
+                    tabMove()
+                <span class="kw">else</span>:
+                    status = <span class="str">"restart page fail_tabMove"</span>
+                    refresh()
+                    tabMove()
+            <span class="kw">else</span>:
+                status = <span class="str">"view page fail_tabMove"</span>
+                exists_click(<img src="1515128420974.png" />,<span class="dig">5</span>)
+                refresh()
+                tabMove()
+
+            Log(<span class="str">"AxisRestart_multi_01.29-02.05"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#            cnt = cnt + 1</span>
+            status = <span class="str">"login window"</span>
+
+
+
+<span class="cmt">#            if exists("1515141255698.png")</span>
+<span class="cmt">#            if exists("1515133309658.png",5):</span>
+<span class="cmt">#                type(Key.F5)</span>
+<span class="cmt">#                wait(10)</span>
+        exists_click(<img src="1515128420974.png" />,<span class="dig">5</span>)
+        <span class="kw">while</span> <span class="kw">not</span> exists(<img src="1515053209298.png" />,<span class="dig">600</span>):
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="skw">type</span>(Key.F6)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="skw">type</span>(<span class="str">"http://10.0.127."</span>+ipArr[<span class="dig">0</span>])
+            <span class="skw">type</span>(Key.ENTER)
+            <span class="skw">wait</span>(<span class="dig">2</span>)
+            exists_click(<img src="1515128420974.png" />,<span class="dig">10</span>)
+        cnt = cnt+<span class="dig">1</span>
+<span class="cmt">#        wait("1515053209298.png",FOREVER)</span>
+<span class="kw">try</span>:
+    <span class="kw">global</span> cnt
+    <span class="kw">global</span> status
+    status = <span class="str">"temp"</span>
+    cnt = <span class="dig">0</span>
+    Log(<span class="str">"AxisRestart_multi_01.29-02.05"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    Restart()
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"AxisRestart_multi_01.29-02.05"</span>,<span class="str">'a'</span>,errorConst.error_1)
+<span class="cmt">#    Restart()</span>
+run(<span class="str">"d:\sikuli\gr1mailtest.bat"</span>)
+runScript(<span class="str">"D:\sikuli\script\AxisRestart_Multi.sikuli"</span>)
+</pre>
+</body>
+</html>

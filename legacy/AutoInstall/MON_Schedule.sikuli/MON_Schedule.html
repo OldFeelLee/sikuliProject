@@ -1,0 +1,152 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>MON_Schedule.sikuli</h2> <a href="MON_Schedule.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+
+<span class="kw">def</span> ScheduleCondition(): <span class="cmt">#변수 정의</span>
+    <span class="kw">global</span> AddTime, AddCondition, AddAction, AddTarget
+    AddTime = <span class="skw">find</span>(<img src="1484014960003.png" />)
+    AddCondition = <span class="skw">find</span>(<img src="1484015958935.png" />)
+    AddAction = <span class="skw">find</span>(<img src="1484015971069.png" />)
+    AddTarget = <span class="skw">find</span>(<img src="1484015982266.png" />)
+
+
+<span class="kw">def</span> untilShow_click(image,image2):
+    <span class="kw">while</span> <span class="kw">not</span> exists(image):
+        <span class="skw">click</span>(image2)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> click_click(image1, image2):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+
+<span class="kw">def</span> click_click_click(image1,image2,image3):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+    <span class="skw">click</span>(image3)
+
+<span class="kw">def</span> wait_doubleClick(image1):
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(image1)
+
+<span class="kw">def</span> EVT_ScheduleEnter():
+<span class="cmt">#    App.focus("iNEX Setup")</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    <span class="kw">global</span> status
+    status = <span class="str">"EVT Schedule Enter"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    click_click(Pattern(<img src="1484018041097.png" />).similar(<span class="dig">0.81</span>),Pattern(<img src="1484014813363.png" />).similar(<span class="dig">0.82</span>))
+
+    status = <span class="str">"EVT Schedule setup"</span>
+    ScheduleCondition()
+    wait_doubleClick(AddTime)
+    wait_doubleClick(<img src="1484018242397.png" />)
+    wait_doubleClick(AddCondition)
+    <span class="skw">click</span>(<img src="1487127980338.png" />)
+    <span class="skw">type</span>(<span class="str">"TextInEvent"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1487128040723.png" />).similar(<span class="dig">0.85</span>).targetOffset(-<span class="dig">13</span>,<span class="dig">14</span>))
+    untilShow_click(<img src="1487127567274.png" />,Pattern(<img src="1487127578481.png" />).similar(<span class="dig">0.93</span>))
+    click_click_click(Pattern(<img src="1487129162025.png" />).targetOffset(-<span class="dig">31</span>,<span class="dig">0</span>),<img src="1487128096964.png" />,Pattern(<img src="1487128118474.png" />).similar(<span class="dig">0.85</span>))
+<span class="cmt">#    doubleClick("1484018292430.png")</span>
+
+    wait_doubleClick(AddAction)
+    click_click_click(<img src="1484018340088.png" />,<img src="1484018352228.png" />,Pattern(<img src="1484025667318.png" />).exact().targetOffset(-<span class="dig">2</span>,<span class="dig">14</span>))
+    wait_doubleClick(AddTarget)
+    click_click_click(Pattern(<img src="1484018449712.png" />).exact().targetOffset(-<span class="dig">45</span>,-<span class="dig">1</span>),<img src="1484018481247.png" />,<img src="1484018494731.png" />)
+
+<span class="kw">try</span>:
+    EVT_ScheduleEnter()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

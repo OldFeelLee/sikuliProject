@@ -1,0 +1,641 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>STM_LoadBalance.sikuli</h2> <a href="STM_LoadBalance.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-</span>
+<span class="cmt">#! python</span>
+<span class="cmt">#import os</span>
+<span class="cmt">#import sys</span>
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> ConfigConst
+
+
+<span class="kw">def</span> click_type(image,data):
+    <span class="skw">click</span>(image)
+    <span class="skw">type</span>(data)
+
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+<span class="kw">def</span> if_exists_click(image,time):
+    <span class="kw">if</span> exists(image,time):
+        <span class="skw">click</span>(image)
+
+<span class="kw">def</span> click_click(image1,image2):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+
+<span class="kw">def</span> click_click_click(image1, image2, image3):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+    <span class="skw">click</span>(image3)
+
+
+<span class="kw">def</span> doubleClick_type(image,str):
+    <span class="skw">doubleClick</span>(image)
+    <span class="skw">type</span>(str)
+
+<span class="kw">def</span> click_exists_click(clickImage1,showImage,clickImage2):
+    <span class="skw">click</span>(clickImage1)
+    <span class="kw">if</span> exists(showImage):
+        <span class="skw">click</span>(clickImage2)
+
+<span class="kw">def</span> Login(image):
+    <span class="kw">if</span> exists(image):
+        <span class="kw">while</span> exists(image,<span class="dig">10</span>):
+            <span class="skw">type</span>(image,Key.TAB+<span class="str">"12345678"</span>+Key.ENTER)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> STM_Init():    <span class="cmt">#Key_const </span>
+    <span class="kw">global</span> LoadBalance
+    <span class="kw">global</span> Fixed
+    <span class="kw">global</span> current
+    <span class="kw">global</span> serviceCount
+    <span class="kw">global</span> virtualINT_status
+    <span class="kw">global</span> deviceStatus
+    <span class="kw">global</span> firstCheck
+    <span class="kw">global</span> deviceCharge
+    <span class="kw">global</span> serviceRunning_count
+
+    serviceRunning_count = ConfigConst.Single
+    deviceCharge = ConfigConst.Default
+    firstCheck = ConfigConst.Default
+    deviceStatus=ConfigConst.Default
+    virtualINT_status=ConfigConst.Default
+    serviceCount = ConfigConst.Single
+    current = <span class="str">"Fixed"</span>
+    LoadBalance=Key.HOME
+    Fixed = Key.END
+
+
+<span class="kw">def</span> multiStreaming_Set():    <span class="cmt">#streaming 복사 후 server ip 및 service port 변경</span>
+    <span class="kw">global</span> status
+    status = <span class="str">"service manager setting"</span>
+    run(<span class="str">"C:\Sikuli\CopyBat.bat"</span>)
+    openApp(<span class="str">"C:\STM\ServiceManager.exe"</span>)
+    if_exists_click(Pattern(<img src="1487752803706.png" />).similar(<span class="dig">0.92</span>).targetOffset(<span class="dig">0</span>,<span class="dig">8</span>),<span class="dig">60</span>)
+    click_click(Pattern(<img src="1487640159144.png" />).targetOffset(<span class="dig">8</span>,-<span class="dig">3</span>),Pattern(<img src="1487640207079.png" />).targetOffset(-<span class="dig">4</span>,-<span class="dig">11</span>))
+    doubleClick_type(Pattern(<img src="1487640243411.png" />).similar(<span class="dig">0.90</span>),ConfigConst.Server_IP)
+    click_exists_click(<img src="1487640536058.png" />,<img src="1487640563367.png" />,<img src="1487640591377.png" />)
+    click_click(Pattern(<img src="1487640159144.png" />).targetOffset(<span class="dig">8</span>,-<span class="dig">3</span>),Pattern(<img src="1487640207079.png" />).targetOffset(-<span class="dig">3</span>,<span class="dig">10</span>))
+    doubleClick_type(Pattern(<img src="1487640673858.png" />).similar(<span class="dig">0.90</span>),ConfigConst.Service_Port)
+    click_exists_click(<img src="1487640536058.png" />,<img src="1487640563367.png" />,<img src="1487640591377.png" />)
+
+<span class="kw">def</span> statusChange_to(status_):
+    <span class="kw">global</span> status
+    <span class="kw">global</span> current
+    statusConst=<span class="str">"LoadBalance"</span>
+    <span class="kw">if</span> statusConst==status_:
+        status = <span class="str">"status change to loadbalance"</span>
+
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), LoadBalance)
+        if_exists_click(<img src="1487647119862.png" />,<span class="dig">2</span>)
+        <span class="skw">click</span>()
+        current = <span class="str">"LoadBalance"</span>
+        deviceAssign()
+    <span class="kw">else</span>:
+        status = <span class="str">"status change to Fixed"</span>
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), Fixed)
+        if_exists_click(<img src="1487647119862.png" />,<span class="dig">2</span>)
+        <span class="skw">click</span>()
+        current =<span class="str">"Fixed"</span>
+        deviceAssign()
+
+<span class="kw">def</span> statusChange_toFixed():
+    <span class="kw">global</span> status
+    status = <span class="str">"status change to Fixed"</span>
+    <span class="kw">global</span> current
+    click_type(Pattern(<img src="1487644776254.png" />).exact(), Fixed)
+    if_exists_click(<img src="1487647119862.png" />,<span class="dig">2</span>)
+    <span class="skw">click</span>()
+    current =<span class="str">"Fixed"</span>
+    deviceAssign()
+
+<span class="kw">def</span> statusCheck():
+    <span class="kw">global</span> status
+    status = <span class="str">"status Check"</span>
+    <span class="kw">if</span> current ==<span class="str">"LoadBalance"</span>:
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), LoadBalance)
+        <span class="kw">if</span> exists(<img src="1487647119862.png" />,<span class="dig">2</span>):
+            <span class="skw">click</span>(<img src="1487647119862.png" />)
+            Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+        <span class="kw">else</span>:
+            <span class="skw">click</span>()
+    <span class="kw">else</span>:
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), Fixed)
+        <span class="kw">if</span> exists(<img src="1487647119862.png" />,<span class="dig">2</span>):
+            <span class="skw">click</span>(<img src="1487647119862.png" />)
+            Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+        <span class="kw">else</span>:
+            <span class="skw">click</span>()
+
+
+<span class="kw">def</span> statusChange():    <span class="cmt">#Fixed 면 Loadbalance로 Loadbalance 면 Fixed로</span>
+    <span class="kw">global</span> current
+    <span class="kw">global</span> deviceCharge
+    <span class="kw">if</span> current == <span class="str">"Fixed"</span>:
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), LoadBalance)
+        current = <span class="str">"LoadBalance"</span>
+        if_exists_click(<img src="1487647119862.png" />,<span class="dig">2</span>)
+
+    <span class="kw">else</span>:
+        click_type(Pattern(<img src="1487644776254.png" />).exact(), Fixed)
+        current = <span class="str">"Fixed"</span>
+        if_exists_click(<img src="1487647119862.png" />,<span class="dig">2</span>)
+    deviceCharge = ConfigConst.Default
+
+
+<span class="kw">def</span> deviceAssign():
+    <span class="kw">global</span> status
+    <span class="kw">global</span> deviceCharge
+    status = <span class="str">"Device Assign"</span>
+    <span class="kw">if</span> deviceCharge == ConfigConst.Default:
+
+        click_type((),Key.HOME)
+        click_click_click(<img src="1487647351040.png" />,Pattern(<img src="1487647445539.png" />).targetOffset(-<span class="dig">25</span>,<span class="dig">0</span>),<img src="1487647479902.png" />)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        deviceCharge = ConfigConst.Running
+
+<span class="kw">def</span> deviceUnassign():
+    <span class="kw">global</span> status
+    <span class="kw">global</span> deviceCharge
+
+    status = <span class="str">"Device Unassign"</span>
+    <span class="kw">if</span> exists(<img src="1487647351040.png" />):
+        click_click(<img src="1487647351040.png" />,Pattern(<img src="1487647445539.png" />).targetOffset(-<span class="dig">25</span>,<span class="dig">0</span>))
+        click_click(Pattern(<img src="1487728320248.png" />).targetOffset(-<span class="dig">24</span>,<span class="dig">1</span>),<img src="1487647479902.png" />)
+    <span class="kw">else</span>:
+        <span class="skw">click</span>(<img src="1487653184633.png" />)
+        click_click(<img src="1487647351040.png" />,Pattern(<img src="1487647445539.png" />).targetOffset(-<span class="dig">25</span>,<span class="dig">0</span>))
+        click_click(Pattern(<img src="1487728320248.png" />).targetOffset(-<span class="dig">24</span>,<span class="dig">1</span>),<img src="1487647479902.png" />)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    deviceCharge = ConfigConst.Default
+
+
+<span class="kw">def</span> virtualINTSet():
+    <span class="kw">global</span> virtualINT_status
+
+
+    <span class="kw">if</span> virtualINT_status == ConfigConst.Default:
+        openApp(<span class="str">"D:\Test_Util\StrongVirtualINT\G1VirtualINT\G1VirtualINT.exe"</span>)
+        if_exists_click(<img src="1487661932651.png" />,<span class="dig">20</span>)
+        virtualINT_status=ConfigConst.Running
+    <span class="kw">print</span> virtualINT_status
+
+<span class="kw">def</span> deviceReset():
+    <span class="kw">global</span> status
+    <span class="kw">global</span> deviceStatus
+
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1487643896246.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    status = <span class="str">"Device Reset"</span>
+<span class="cmt">#    click_click("1487050858920-1.png","1487051671208.png")</span>
+    <span class="skw">click</span>(<img src="1487050858920-1.png" />)
+    <span class="kw">if</span> deviceStatus == ConfigConst.Default:
+        <span class="kw">if</span> exists(<img src="1487663297181.png" />):
+            <span class="skw">click</span>(<img src="1487663297181.png" />)
+            keyDown(Key.CTRL+<span class="str">"a"</span>)
+            keyUp(Key.CTRL+<span class="str">"a"</span>)
+            <span class="skw">type</span>(Key.DELETE)
+            <span class="skw">click</span>(Pattern(<img src="1487051765657.png" />).targetOffset(-<span class="dig">45</span>,-<span class="dig">3</span>))
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+
+<span class="kw">def</span> deviceAdd(deviceNum):
+    <span class="kw">global</span> status
+    <span class="kw">global</span> deviceCount
+    <span class="kw">global</span> deviceStatus
+
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1487643896246.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    status = <span class="str">"Device Add"</span>
+    <span class="kw">if</span> deviceStatus == ConfigConst.Default:
+        deviceCount = int(deviceNum)
+        click_click(<img src="1487050858920.png" />,Pattern(<img src="1487050882738.png" />).similar(<span class="dig">0.95</span>).targetOffset(<span class="dig">62</span>,-<span class="dig">4</span>))
+        <span class="kw">if</span> <span class="kw">not</span> exists(<img src="1487053359526.png" />):
+            <span class="skw">click</span>(Pattern(<img src="1487053415818.png" />).targetOffset(-<span class="dig">2</span>,<span class="dig">19</span>))
+            <span class="skw">type</span>(Key.HOME)
+        keyDown(Key.SHIFT+Key.CTRL+Key.ALT)
+        <span class="skw">click</span>(<img src="1487050915988.png" />)
+        keyUp(Key.SHIFT+Key.CTRL+Key.ALT)
+        <span class="skw">doubleClick</span>(Pattern(<img src="1487663041476.png" />).exact())
+        <span class="skw">type</span>(<span class="str">"10.0.124.58"</span>)
+        <span class="skw">doubleClick</span>(Pattern(<img src="1487051108918.png" />).exact())
+        <span class="skw">type</span>(deviceNum+Key.ENTER)
+        <span class="skw">click</span>(<img src="1487051183723.png" />)
+        <span class="kw">while</span> <span class="kw">not</span> exists(<img src="1487051451730.png" />):
+            <span class="skw">click</span>(<img src="1487051183723.png" />)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+        deviceStatus = ConfigConst.Running
+
+<span class="kw">def</span> serviceCount_Add():
+    <span class="kw">global</span> serviceCount
+    <span class="kw">if</span> serviceCount == ConfigConst.Single:
+        serviceCount = ConfigConst.Multi
+    <span class="kw">else</span>:
+        serviceCount = ConfigConst.Single
+
+<span class="kw">def</span> serviceCount_Del():
+    <span class="kw">global</span> serviceCount
+    <span class="kw">global</span> deviceCharge
+    <span class="kw">if</span> serviceCount == ConfigConst.Single:
+        serviceCount = ConfigConst.Default
+        deviceCharge = ConfigConst.Default
+    <span class="kw">else</span>:
+        serviceCount = ConfigConst.Single
+
+<span class="kw">def</span> STM_Start():    <span class="cmt">#Streaming service start</span>
+    <span class="kw">global</span> firstCheck
+    <span class="kw">global</span> serviceRunning_count
+    <span class="kw">global</span> status
+    status = <span class="str">"service Start"</span>
+    keyDown(Key.WIN+<span class="str">"r"</span>)
+    keyUp(Key.WIN+<span class="str">"r"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"C:\Sikuli\cmd_shortCut"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">type</span>(<span class="str">"C:\STM\StreamingService.exe"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    <span class="kw">if</span> serviceRunning_count == ConfigConst.Single:
+        serviceRunning_count = ConfigConst.Multi
+    <span class="kw">else</span>:
+        serviceRunning_count = ConfigConst.Single
+
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+
+<span class="kw">def</span> deviceAssign_check():
+    <span class="kw">global</span> service1_device
+    <span class="kw">global</span> service2_device
+    <span class="kw">global</span> serviceTotal_device
+    serviceTotal_device=deviceCount
+    service1_device = deviceCount/<span class="dig">2</span>
+    deviceTemp = deviceCount%<span class="dig">2</span>
+    <span class="kw">if</span> deviceTemp==<span class="dig">0</span>:
+        service2_device = deviceCount/<span class="dig">2</span>
+    <span class="kw">else</span>:
+        service2_device = deviceCount/<span class="dig">2</span>+<span class="dig">1</span>
+
+
+<span class="kw">def</span> deviceAssign_filter():
+    <span class="kw">global</span> status
+    <span class="kw">global</span> serviceCount
+    status = <span class="str">"Device Assign check"</span>
+    <span class="kw">if</span> current==<span class="str">"Fixed"</span>:
+        serviceCount = ConfigConst.Single
+
+    <span class="kw">if</span> serviceCount==ConfigConst.Single:
+        status= <span class="str">"SingleService Assign check"</span>
+        <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(serviceTotal_device))
+        <span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+            <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+        <span class="kw">else</span>:
+            Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    <span class="kw">else</span>:
+        status = <span class="str">"MultiService_Single running Assign check"</span>
+        <span class="kw">if</span> <span class="kw">not</span> serviceRunning_count == ConfigConst.Single:
+            status = <span class="str">"MultiService Assign check"</span>
+            <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(service1_device))
+            <span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+                <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+                <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(service2_device))
+                <span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+                    <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+                <span class="kw">else</span>:
+                    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+            <span class="kw">else</span>:
+                Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+        <span class="kw">else</span>:
+
+            <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(serviceTotal_device))
+            <span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+                <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+            <span class="kw">else</span>:
+                Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+
+<span class="kw">def</span> deviceUnassign_filter():
+    <span class="kw">global</span> status
+    status = <span class="str">"Device Unassign check"</span>
+    <span class="kw">if</span> current==<span class="str">"Fixed"</span>:
+        serviceCount = ConfigConst.Single
+    <span class="kw">if</span> serviceCount==ConfigConst.Single:
+        status= <span class="str">"SingleService Unassign check"</span>
+        <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(serviceTotal_device))
+        <span class="kw">if</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+            <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+        <span class="kw">else</span>:
+            Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    <span class="kw">else</span>:
+        status= <span class="str">"SingleService Unassign check"</span>
+        <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(service1_device))
+        <span class="kw">if</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+            <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+            <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"Numbers: "</span>+str(service2_device))
+            <span class="kw">if</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+                <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+            <span class="kw">else</span>:
+                Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+        <span class="kw">else</span>:
+            Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+
+
+<span class="kw">def</span> Kill():    <span class="cmt">#Streaming service terminate</span>
+    <span class="kw">global</span> serviceRunning_count
+    <span class="kw">global</span> status
+    status = <span class="str">"service  terminate"</span>
+    os.system(<span class="str">'taskkill /f /im StreamingService.exe'</span>)
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+    <span class="kw">if</span> serviceRunning_count == ConfigConst.Multi:
+        serviceRunning_count = ConfigConst.Single
+    <span class="kw">else</span>:
+        serviceRunning_count = ConfigConst.Default
+
+<span class="kw">def</span> STM_Setup():    <span class="cmt">#Streaming setup enter</span>
+    <span class="kw">global</span> status
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1487643896246.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    <span class="skw">click</span>(<img src="1487644001959.png" />)
+    <span class="kw">if</span> serviceCount == ConfigConst.Multi:
+        <span class="skw">doubleClick</span>(Pattern(<img src="1487838279403.png" />).exact())
+    <span class="kw">elif</span> serviceCount == ConfigConst.Single:
+        <span class="kw">if</span> serviceRunning_count == ConfigConst.Single:
+            <span class="skw">doubleClick</span>(Pattern(<img src="1487838477847.png" />).exact())
+ <span class="cmt">#    if not serviceCount == ConfigConst.Default:</span>
+<span class="cmt">#        doubleClick(Pattern("1487644398778.png").similar(0.84))</span>
+    if_exists_click(<img src="1487644512121.png" />,<span class="dig">60</span>)
+
+<span class="kw">def</span> STM_setupExit():
+    <span class="skw">click</span>(<img src="1487727013898.png" />)
+
+<span class="kw">def</span> STM_Regist():    <span class="cmt">#Service regist</span>
+    <span class="kw">global</span> status
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1487643896246.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    status = <span class="str">"service regist"</span>
+    click_click(<img src="1487644001959.png" />,Pattern(<img src="1487644015998.png" />).similar(<span class="dig">0.88</span>))
+    <span class="kw">if</span> serviceCount == ConfigConst.Default:
+        click_click(Pattern(<img src="1487828985327.png" />).exact().targetOffset(-<span class="dig">154</span>,<span class="dig">0</span>),<img src="1487644093241.png" />)
+    <span class="kw">else</span>:
+        click_click(Pattern(<img src="1487644056606.png" />).similar(<span class="dig">0.96</span>).targetOffset(-<span class="dig">7</span>,<span class="dig">0</span>),<img src="1487644093241.png" />)
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    serviceCount_Add()
+
+<span class="kw">def</span> STM_Unregist():
+    <span class="kw">global</span> status
+    status = <span class="str">"service unregist"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1487643896246.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    <span class="kw">if</span> serviceCount == ConfigConst.Multi:
+        click_click_click(<img src="1487644001959.png" />,Pattern(<img src="1487829623043.png" />).exact() ,Pattern(<img src="1487731609650.png" />).similar(<span class="dig">0.96</span>))
+    <span class="kw">else</span>:
+        click_click_click(<img src="1487644001959.png" />,Pattern(<img src="1487644398778.png" />).similar(<span class="dig">0.84</span>),Pattern(<img src="1487731609650.png" />).similar(<span class="dig">0.96</span>))
+    click_type(<img src="1487731684462.png" />,<span class="str">"12345678"</span>+Key.ENTER)
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    serviceCount_Del()
+
+<span class="kw">def</span> connectionStatus():
+    <span class="kw">global</span> status
+    status = <span class="str">"Device connection status"</span>
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+
+    <span class="skw">type</span>(<img src="1487667323771.png" />,<span class="str">"disconnect"</span>)
+    <span class="kw">if</span> exists(Pattern(<img src="1487667410732.png" />).exact()):
+        <span class="skw">click</span>(Pattern(<img src="1487668615704.png" />).exact())
+        Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    <span class="kw">else</span>:
+        Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+
+
+<span class="kw">def</span> loadbalanceTest_deviceAssign(status_):
+    <span class="kw">global</span> status
+<span class="cmt">#    STM_Init()</span>
+    virtualINTSet()
+    deviceReset()
+    deviceAdd(<span class="str">'2'</span>)
+    STM_Setup()
+    statusChange_to(status_)
+    deviceAssign_check()
+    connectionStatus()
+    deviceAssign_filter()
+    status = <span class="str">"loadbalanceTest_deviceAssign"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">def</span> loadbalanceTest_serviceTerminate_Single(status_):
+    <span class="kw">global</span> status
+    loadbalanceTest_serviceUnregist(status_)
+    Kill()
+    STM_Start()
+    STM_Setup()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    STM_Regist()
+    status = <span class="str">"loadbalanceTest_serviceTerminate_Single"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">def</span> loadbalanceTest_serviceTerminate_Multi(status_):
+    <span class="kw">global</span> status
+    loadbalanceTest_deviceAssign(status_)
+    Kill()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_Start()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    status = <span class="str">"loadbalanceTest_serviceTerminate_Multi"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+
+<span class="kw">def</span> loadbalanceTest_deviceUnassign_status(status_):
+    <span class="kw">global</span> status
+    loadbalanceTest_deviceAssign(status_)
+    deviceUnassign()
+    deviceUnassign_filter()
+    STM_setupExit()
+    STM_Setup()
+    statusCheck()
+    STM_setupExit()
+    status = <span class="str">"loadbalanceTest_deviceUnassign_status"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">def</span> loadbalanceTest_serviceUnregist(status_):
+    loadbalanceTest_deviceAssign(status_)
+    STM_setupExit()
+    STM_Unregist()
+
+
+<span class="kw">def</span> loadbalanceTest_serviceUnregist_Multi(status_):
+    <span class="kw">global</span> status
+
+    loadbalanceTest_serviceUnregist(status_)
+    STM_Setup()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    STM_Regist()
+    STM_Setup()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    status = <span class="str">"loadbalanceTest_serviceUnregist_Multi"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">def</span> loadbalanceTest_serviceUnregist_Single(status_):
+    <span class="kw">global</span> status
+    STM_Unregist()
+    loadbalanceTest_serviceUnregist(status_)
+
+    STM_Regist()
+    STM_Setup()
+    connectionStatus()
+    deviceUnassign_filter()
+    deviceAssign()
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    STM_Regist()
+    status = <span class="str">"loadbalanceTest_serviceUnregist_Single"</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">def</span> loadbalanceTest_statusChange(status_):
+    <span class="kw">global</span> status
+    loadbalanceTest_deviceAssign(status_)
+    statusChange()
+    deviceAssign_filter()
+    statusCheck()
+    STM_setupExit()
+    STM_Setup()
+    statusCheck()
+    deviceAssign()
+
+    connectionStatus()
+    deviceAssign_filter()
+    STM_setupExit()
+    STM_Setup()
+    statusCheck()
+    STM_setupExit()
+    status = <span class="str">"loadbalanceTest_statusChange"</span>
+    Log(<span class="str">"TestResult"</span>, <span class="str">'a'</span>, errorConst.no_error)
+
+
+
+<span class="kw">def</span> loadbalance(status):
+    loadbalanceTest_serviceTerminate_Multi(status)
+
+    loadbalanceTest_serviceUnregist_Multi(status)
+
+    loadbalanceTest_deviceUnassign_status(status)
+
+    loadbalanceTest_serviceUnregist_Single(status)
+
+    loadbalanceTest_serviceTerminate_Single(status)
+
+
+
+<span class="kw">try</span>:
+    <span class="kw">global</span> status
+    STM_Init()
+    <span class="cmt">#multiStreaming_Set()</span>
+    STM_Start()
+    STM_Regist()
+
+<span class="cmt">#    loadbalance("LoadBalance") </span>
+
+    loadbalanceTest_statusChange(<span class="str">"LoadBalance"</span>)
+
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

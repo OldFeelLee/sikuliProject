@@ -1,0 +1,141 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>TestScript.sikuli</h2> <a href="TestScript.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> string
+
+
+<span class="kw">def</span> Time():    <span class="cmt">#get current time</span>
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> DateWrite(filename):
+    Time()
+    f=open(filename+<span class="str">".txt"</span>,<span class="str">'w'</span>)
+    f.write(s+<span class="str">"\n"</span>)
+    f.close()
+
+
+<span class="kw">def</span> Log(filename,mode,flag):     <span class="cmt">#result log</span>
+    <span class="kw">global</span> flagCheck
+    <span class="kw">global</span> cnt
+
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    cntstr = str(cnt)
+    <span class="kw">if</span> cnt == <span class="dig">0</span> :
+        f.write(s+<span class="str">"    "</span>+<span class="str">" start\n"</span>)
+        f.close()
+
+    <span class="kw">else</span>:
+        <span class="kw">if</span> flagCheck==int(flag):
+            f.write(s+<span class="str">"    "</span>+cntstr+<span class="str">" pass\n"</span>)
+            f.close()
+
+        <span class="kw">else</span>:
+            f.write(s+<span class="str">"    "</span>+cntstr+<span class="str">" fail\n"</span>)
+            f.close()
+
+
+<span class="kw">def</span> actionRepeat():
+
+    <span class="kw">global</span> cnt
+    cnt = <span class="dig">0</span>
+    Log(<span class="str">"ActionTest"</span>,<span class="str">'w'</span>,errorConst.no_error)
+    <span class="kw">while</span> True:
+        cnt = cnt +<span class="dig">1</span>
+        <span class="skw">doubleClick</span>(Pattern(<img src="1512379400075.png" />).similar(<span class="dig">0.93</span>))
+        <span class="skw">wait</span>(<img src="1512466430148.png" />,<span class="dig">20</span>)
+        <span class="skw">type</span>(Key.ESC)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        Log(<span class="str">"ActionTest"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+
+
+
+
+<span class="kw">try</span> :
+
+    DateWrite(<span class="str">"date"</span>)
+    dateImport = open(<span class="str">"c:/sikuli/date.txt"</span>).read(<span class="dig">10</span>)
+    dateExport = open(<span class="str">"dateExport+"</span>.txt",<span class="str">'w'</span>)
+    dateExport.write(dateImport+<span class="str">"\n"</span>)
+    dateExport.close()
+
+
+<span class="kw">except</span> FindFailed:
+    exit(None)
+</pre>
+</body>
+</html>

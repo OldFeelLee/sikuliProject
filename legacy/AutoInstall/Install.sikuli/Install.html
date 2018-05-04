@@ -1,0 +1,150 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Install.sikuli</h2> <a href="Install.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-</span>
+<span class="kw">import</span> datetime
+<span class="kw">from</span> sikuli <span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> InputPath():
+<span class="cmt">#    global idis</span>
+    <span class="kw">global</span> setuppath
+    setuppath=<span class="skw">input</span>(unicode(<span class="str">"설치파일 경로 입력하세요."</span>,<span class="str">"utf-8"</span>))
+
+
+<span class="kw">def</span> success():
+    f=open(<span class="str">"c:/a/install.txt"</span>,<span class="str">'a'</span>)
+    f.write(s+<span class="str">"    Install Complete!\n"</span>)
+    f.close()
+
+<span class="kw">def</span> failed():
+    f=open(<span class="str">"c:/a/install.txt"</span>,<span class="str">'a'</span>)
+    f.write(s+<span class="str">"    Install Fail!\n"</span>)
+    f.write(s+<span class="str">"    All Test Skip\n"</span>)
+    f.close()
+
+
+
+Time()
+
+oem=open(<span class="str">"c:/a/install.txt"</span>).read(<span class="dig">1</span>)
+f=open(<span class="str">"c:/a/install.txt"</span>,<span class="str">'a'</span>)
+f.write(s+<span class="str">"    Start!\n"</span>)
+f.close()
+
+
+<span class="kw">while</span> True:
+    InputPath()
+    <span class="kw">if</span> <span class="kw">not</span> App.open(setuppath):
+        <span class="skw">popup</span>(unicode(<span class="str">"설치경로를 확인해주세요 "</span>,<span class="str">"utf-8"</span>), unicode(<span class="str">"Error"</span>,<span class="str">"utf-8"</span>))
+
+    <span class="kw">else</span>:
+
+        <span class="kw">break</span>
+<span class="cmt">#exit(errorConst.error_1)    </span>
+<span class="kw">try</span>:
+    cnt=<span class="dig">0</span>
+
+    <span class="kw">while</span> <span class="kw">not</span> exists(<img src="1483670596154.png" />):
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">while</span> <span class="kw">not</span> exists(Pattern(<img src="1483671043427.png" />).exact(),<span class="dig">1</span>):
+        <span class="skw">click</span>(Pattern(<img src="1483670752328.png" />).similar(<span class="dig">0.96</span>))
+
+    <span class="kw">while</span> <span class="kw">not</span> exists(Pattern(<img src="1483671346800.png" />).similar(<span class="dig">0.91</span>)):
+        <span class="skw">type</span>(<span class="str">"n"</span>)
+        <span class="kw">if</span> exists(<img src="1483672154543.png" />):
+            <span class="kw">if</span> oem ==<span class="str">"I"</span>:
+                App.focus(<span class="str">"IDIS Solution Suite"</span>)
+            <span class="kw">else</span>:
+                App.focus(<span class="str">"iNEX"</span>)
+
+    <span class="kw">if</span> exists(<img src="1483671483949.png" />,<span class="dig">600</span>):
+        <span class="skw">click</span>(<img src="1483671506517.png" />)
+
+    Time()
+    success()
+    exit(errorConst.no_error)
+<span class="cmt">#    run("C:\sikuli\gr1mailtest.bat")    </span>
+<span class="kw">except</span> FindFailed:
+    Time()
+    failed()
+    exit(errorConst.error_1)
+<span class="cmt">#    run("C:\sikuli\gr1mailtest.bat")</span>
+
+</pre>
+</body>
+</html>

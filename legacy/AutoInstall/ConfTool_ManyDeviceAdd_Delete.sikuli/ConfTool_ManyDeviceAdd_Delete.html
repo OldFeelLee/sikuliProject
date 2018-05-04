@@ -1,0 +1,145 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>ConfTool_ManyDeviceAdd_Delete.sikuli</h2> <a href="ConfTool_ManyDeviceAdd_Delete.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+
+<span class="kw">def</span> Vanish_click(image):
+
+    <span class="kw">try</span>:
+        <span class="kw">while</span> exists(image, <span class="dig">10</span>):
+            <span class="skw">type</span>(image,Key.TAB+<span class="str">"12345678"</span>+Key.ENTER)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">except</span>:
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> ConfTool_ManyDeviceAdd():
+    <span class="kw">global</span> status
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+<span class="cmt">#    Vanish_click("1486617801030.png")           </span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    status = <span class="str">"ManyDeviceAdd"</span>
+    <span class="skw">click</span>(<img src="1487050858920.png" />)
+    <span class="skw">click</span>(Pattern(<img src="1487050882738.png" />).similar(<span class="dig">0.95</span>).targetOffset(<span class="dig">62</span>,-<span class="dig">4</span>))
+    <span class="kw">if</span> <span class="kw">not</span> exists(<img src="1487053359526.png" />):
+        <span class="skw">click</span>(Pattern(<img src="1487053415818.png" />).targetOffset(-<span class="dig">2</span>,<span class="dig">19</span>))
+        <span class="skw">type</span>(Key.HOME)
+    keyDown(Key.SHIFT+Key.CTRL+Key.ALT)
+    <span class="skw">click</span>(<img src="1487050915988.png" />)
+    keyUp(Key.SHIFT+Key.CTRL+Key.ALT)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1487051108918.png" />).exact())
+    <span class="skw">type</span>(<span class="str">"1000"</span>+Key.ENTER)
+    <span class="skw">click</span>(<img src="1487051183723.png" />)
+    <span class="kw">while</span> <span class="kw">not</span> exists(<img src="1487051451730.png" />):
+        <span class="skw">click</span>(<img src="1487051183723.png" />)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+
+<span class="kw">def</span> ConfTool_ManyDeviceDelete():
+    <span class="kw">global</span> status
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    status = <span class="str">"ManyDeviceDelete"</span>
+    <span class="skw">click</span>(<img src="1487050858920.png" />)
+    <span class="skw">click</span>(<img src="1487051671208.png" />)
+    keyDown(Key.CTRL+<span class="str">"a"</span>)
+    keyUp(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">type</span>(Key.DELETE)
+    <span class="skw">click</span>(Pattern(<img src="1487051765657.png" />).targetOffset(-<span class="dig">45</span>,-<span class="dig">3</span>))
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+
+<span class="kw">try</span> :
+    ConfTool_ManyDeviceAdd()
+    ConfTool_ManyDeviceDelete()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

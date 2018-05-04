@@ -1,0 +1,111 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Play_2.sikuli</h2> <a href="Play_2.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-</span>
+<span class="cmt">#! python</span>
+<span class="kw">from</span> sikuli <span class="kw">import</span> errorConst
+
+
+
+Ecode = runScript(<span class="str">"C:\sikuli\script\AutoInstall\Install"</span>) <span class="cmt"># 설치</span>
+<span class="cmt">#runScript("C:\sikuli\script\AutoInstall\exit_Test_01")</span>
+<span class="kw">if</span> Ecode == errorConst.no_error:
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\LicenseAuth"</span>)
+    Ecode_00 = runScript(<span class="str">"C:\sikuli\script\AutoInstall\ConfTool"</span>) <span class="cmt"># 장치 등록    </span>
+    <span class="kw">if</span> Ecode_00 == errorConst.no_error:
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\StorageAdd"</span>) <span class="cmt">#Storage 설정</span>
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\TextInSetup"</span>) <span class="cmt">#TextIn 설정</span>
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\REC_Schedule"</span>) <span class="cmt">#REC schedule 설정</span>
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\MON_Schedule"</span>) <span class="cmt">#EventAck schedule 설정 </span>
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\BackupSetup"</span>) <span class="cmt">#Backup 설정    </span>
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\PosSimRun"</span>) <span class="cmt">#PosSim 실행 및 설정        </span>
+    Ecode_01 = runScript(<span class="str">"C:\sikuli\script\AutoInstall\Client"</span>) <span class="cmt"># Client login</span>
+    <span class="kw">if</span> Ecode_01 == errorConst.no_error :
+        <span class="kw">if</span> Ecode_00 == errorConst.no_error:
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\Client_Live"</span>) <span class="cmt">#Client_Live 확인</span>
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\Client_EventManager"</span>) <span class="cmt">#Client_EventActionAck 확인</span>
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\STM_PTZ"</span>) <span class="cmt">#Client_PTZ 확인</span>
+
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\REC_ClipCopy"</span>) <span class="cmt">#REC_ClipCopy</span>
+            runScript(<span class="str">"C:\sikuli\script\AutoInstall\BackupSearch"</span>) <span class="cmt"># BackupClipCopy    </span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\ProblemReporter"</span>) <span class="cmt"># ProblemReporter</span>
+
+    Ecode_02 = runScript(<span class="str">"C:\sikuli\script\AutoInstall\DBExport"</span>) <span class="cmt"># DB Export</span>
+    <span class="kw">if</span> Ecode_02 == errorConst.no_error:
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\DBImport"</span>) <span class="cmt"># DB Import</span>
+
+<span class="cmt">#run("C:\sikuli\gr1mailtest.bat") # Test 결과 메일</span>
+<span class="cmt">#run("C:\sikuli\ExportDel.bat") # DB Expot file 삭제</span>
+
+</pre>
+</body>
+</html>

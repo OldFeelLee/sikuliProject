@@ -1,0 +1,125 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Mail.sikuli</h2> <a href="Mail.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    <span class="kw">global</span> t
+    <span class="kw">global</span> time
+    time = datetime.datetime.now()
+    t = str(time)
+    <span class="kw">global</span> today
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Hours():
+    <span class="kw">global</span> hours
+    hours = datetime.timedelta(hours=<span class="dig">12</span>)
+
+
+
+<span class="kw">def</span> Minute():
+    <span class="kw">global</span> min
+    min = datetime.timedelta(minutes=<span class="dig">1</span>)
+
+<span class="cmt">#run("d:\sikuli\gr1mailtest.bat")</span>
+<span class="cmt">#run ("D:\Test_Util\gr1Mailer\gr1mailtest.bat")</span>
+<span class="cmt">#run("cmd")</span>
+<span class="kw">def</span> Time2():
+    Time()
+    Hours()
+<span class="cmt">#Minute()</span>
+<span class="cmt">#d=today+hours</span>
+    <span class="kw">global</span> e
+    e=today+hours
+<span class="kw">def</span> su():
+    a=<span class="dig">1</span>
+    b=<span class="dig">2</span>
+    c=a+b
+<span class="str">'''
+while True:
+    Time()
+    click("1481607714697.png")
+    if e&lt;today:
+        run("d:\sikuli\gr1mailtest.bat")
+        print e
+        print today
+        break
+'''</span>
+<span class="cmt">#if d&gt;today:</span>
+    <span class="cmt">#run("d:\sikuli\gr1mailtest.bat")</span>
+Time2()
+</pre>
+</body>
+</html>

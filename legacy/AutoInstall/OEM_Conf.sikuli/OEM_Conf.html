@@ -1,0 +1,100 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>OEM_Conf.sikuli</h2> <a href="OEM_Conf.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">#oem 별 client focusing 및 ConfTool 실행</span>
+
+<span class="kw">def</span> focus_app(appName):
+    <span class="kw">global</span> g2conftool
+    g2conftool = App(appName)
+    g2conftool.focus()
+
+<span class="kw">def</span> openApp_logIn(path,image):
+    check=str(g2conftool)
+    <span class="kw">if</span> check[<span class="dig">1</span>]==<span class="str">'-'</span>:
+        App.open(path)
+        <span class="kw">while</span> <span class="kw">not</span> exists(image):
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">type</span>(image,<span class="str">"12345678"</span>+Key.ENTER)
+
+
+
+oem=open(<span class="str">"c:/sikuli/TestResult.txt"</span>).read(<span class="dig">1</span>)
+<span class="kw">if</span> oem == <span class="str">"I"</span>:
+    focus_app(<span class="str">"G2ConfTool.exe"</span>)
+    openApp_logIn(<span class="str">"C:\IDIS Solution Suite\Client\G2ConfTool.exe"</span>,Pattern(<img src="1486530419073.png" />).similar(<span class="dig">0.92</span>))
+
+<span class="kw">else</span>:
+    focus_app(<span class="str">"G2ConfTool.exe"</span>)
+    openApp_logIn(<span class="str">"C:\iNEX\Client\G2ConfTool.exe"</span>,Pattern(<img src="1486530419073.png" />).similar(<span class="dig">0.92</span>))
+</pre>
+</body>
+</html>

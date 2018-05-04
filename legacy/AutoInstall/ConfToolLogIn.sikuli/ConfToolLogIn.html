@@ -1,0 +1,146 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>ConfToolLogIn.sikuli</h2> <a href="ConfToolLogIn.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">#def ConfToolStart():    #ip 복사 및 ConfTool 실행</span>
+<span class="skw">doubleClick</span>(<img src="1483686728732.png" />)
+<span class="kw">global</span> a
+a= <span class="dig">1</span>
+<span class="skw">wait</span>(<span class="dig">2</span>)
+<span class="skw">type</span>(<span class="str">"12345678"</span>+Key.ENTER)
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="kw">if</span> exists(<img src="1455775002971.png" />):
+    <span class="skw">click</span>(<img src="1455775002971.png" />)
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="skw">click</span>(<img src="1454380361915.png" />)
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> ScanMode(): <span class="cmt"># Scan mode 진입 및 IP Scan 선택</span>
+    a= <span class="dig">2</span>
+
+    <span class="skw">click</span>(Pattern(<img src="1454380412860.png" />).similar(<span class="dig">0.94</span>).targetOffset(<span class="dig">108</span>,-<span class="dig">25</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="kw">if</span> exists(Pattern(<img src="1454380987835.png" />).exact()):
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1454380525571.png" />).similar(<span class="dig">0.91</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1454380563437.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">70</span>,-<span class="dig">1</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+
+        ip()
+        auto()
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+    <span class="kw">else</span>:
+
+        ip()
+        auto()
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+
+
+<span class="kw">def</span> ip(): <span class="cmt"># ip 입력</span>
+
+    <span class="skw">doubleClick</span>(Pattern(<img src="1454380633509.png" />).targetOffset(-<span class="dig">36</span>,<span class="dig">0</span>))
+    <span class="skw">type</span>(<span class="str">"10.0.127.114"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> auto(): <span class="cmt"># DeviceScan 및 ID/PW 입력</span>
+
+    <span class="skw">click</span>(<img src="1454380656889.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(<img src="1454380688887.png" />):
+            <span class="skw">click</span>(<img src="1454380656889.png" />)
+        <span class="kw">else</span>:
+            <span class="kw">break</span>
+    <span class="skw">click</span>(Pattern(<img src="1454381253425.png" />).exact().targetOffset(<span class="dig">8</span>,-<span class="dig">10</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1454381290995.png" />)
+
+    <span class="skw">type</span>(<span class="str">"admin"</span>+Key.TAB) <span class="cmt">#ID!</span>
+    <span class="skw">type</span>(<span class="str">"pylon"</span>) <span class="cmt"># PW</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1461749295384.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1455166085100.png" />)
+
+
+
+<span class="cmt">#ConfToolStart()</span>
+
+<span class="cmt">#ScanMode()</span>
+
+<span class="cmt">#print a</span>
+
+</pre>
+</body>
+</html>

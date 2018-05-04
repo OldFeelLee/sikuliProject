@@ -1,0 +1,204 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>REC_Schedule.sikuli</h2> <a href="REC_Schedule.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+<span class="kw">def</span> ScheduleEnter():
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    <span class="kw">global</span> status
+    status = <span class="str">"REC ScheduleEnter"</span>
+
+    <span class="skw">click</span>(<img src="1486436377626.png" />)
+    <span class="skw">click</span>(Pattern(<img src="1484014813363.png" />).similar(<span class="dig">0.82</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1484014862626.png" />).similar(<span class="dig">0.86</span>).targetOffset(<span class="dig">28</span>,-<span class="dig">16</span>))
+    <span class="skw">click</span>(<img src="1484014891148.png" />)
+
+
+<span class="kw">def</span> ScheduleCondition(): <span class="cmt">#변수 정의</span>
+    <span class="kw">global</span> AddTime, AddCondition, AddAction, AddTarget
+    AddTime = <span class="skw">find</span>(<img src="1484014960003.png" />)
+    AddCondition = <span class="skw">find</span>(<img src="1484015958935.png" />)
+    AddAction = <span class="skw">find</span>(<img src="1484015971069.png" />)
+    AddTarget = <span class="skw">find</span>(<img src="1484015982266.png" />)
+
+<span class="kw">def</span> Timelapse():
+    <span class="kw">global</span> status
+    status = <span class="str">"Timelapse Schedule"</span>
+    <span class="skw">doubleClick</span>(AddTime)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1484015441456.png" />)
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455172850705.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455173093607.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddTarget)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173395787.png" />).targetOffset(-<span class="dig">33</span>,-<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="cmt">#    click(Pattern("1455173491577.png").targetOffset(-47,3))</span>
+<span class="cmt">#    wait(30)</span>
+
+
+<span class="kw">def</span> MotionEventREC():  <span class="cmt">#모션 이벤트 녹화설정   </span>
+    <span class="kw">global</span> status
+    status = <span class="str">"MotionEvent Schedule"</span>
+    <span class="skw">click</span>(Pattern(<img src="1484015497155.png" />).similar(<span class="dig">0.87</span>).targetOffset(<span class="dig">128</span>,<span class="dig">16</span>))
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455179326544.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173093607-1.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<img src="1455180983505.png" />,<span class="str">"5"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1484016246363.png" />).similar(<span class="dig">0.86</span>))
+    <span class="skw">doubleClick</span>(AddTarget)
+
+
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-1.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="cmt">#    click(Pattern("1455173491577-1.png").targetOffset(-47,3))</span>
+<span class="cmt">#    wait(1)</span>
+
+<span class="kw">def</span> TextInEventREC():  <span class="cmt">#TextIn 이벤트 녹화설정   </span>
+    <span class="kw">global</span> status
+    status = <span class="str">"TextInEventREC Schedule"</span>
+    <span class="skw">click</span>(Pattern(<img src="1484015497155.png" />).similar(<span class="dig">0.86</span>).targetOffset(<span class="dig">128</span>,<span class="dig">16</span>))
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1486446856819.png" />)
+    <span class="skw">type</span>(<span class="str">"TextIn"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1486446959027.png" />).similar(<span class="dig">0.96</span>).targetOffset(-<span class="dig">11</span>,<span class="dig">17</span>))
+    <span class="kw">while</span> <span class="kw">not</span> exists(Pattern(<img src="1486447076069.png" />).similar(<span class="dig">0.85</span>),<span class="dig">1</span>):
+        <span class="skw">click</span>(Pattern(<img src="1486448536969.png" />).similar(<span class="dig">0.93</span>).targetOffset(-<span class="dig">38</span>,-<span class="dig">20</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1486447138978.png" />).targetOffset(-<span class="dig">33</span>,<span class="dig">0</span>))
+    <span class="skw">click</span>(<img src="1486447173897.png" />)
+    <span class="skw">click</span>(<img src="1486447192906.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173093607-1.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<img src="1455180983505.png" />,<span class="str">"5"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1484016246363.png" />).similar(<span class="dig">0.86</span>))
+    <span class="skw">doubleClick</span>(AddTarget)
+
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-1.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173491577-1.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+
+<span class="kw">try</span>:
+    ScheduleEnter()
+    ScheduleCondition()
+    Timelapse()
+    MotionEventREC()
+    TextInEventREC()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

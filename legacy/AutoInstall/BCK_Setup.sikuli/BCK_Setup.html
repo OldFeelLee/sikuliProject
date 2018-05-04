@@ -1,0 +1,145 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>BCK_Setup.sikuli</h2> <a href="BCK_Setup.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+<span class="kw">def</span> click_click(image1,image2):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+
+<span class="kw">def</span> click_click_click(image1,image2,image3):
+    <span class="skw">click</span>(image1)
+    <span class="skw">click</span>(image2)
+    <span class="skw">click</span>(image3)
+
+<span class="kw">def</span> waitVanish_click(image1,image2):
+    <span class="kw">while</span> <span class="kw">not</span> exists(image1):
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(image2)
+
+<span class="kw">def</span> BCK_Setup():
+    <span class="kw">global</span> status
+    status = <span class="str">"BackupSetup Enter"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+    <span class="skw">click</span>(<img src="1484028992465.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1484029034988.png" />)
+    waitVanish_click(<img src="1486438226974.png" />,<img src="1484029119976.png" />)
+    status = <span class="str">"BackupSetup_SiteSetup"</span>
+    click_click(<img src="1484029150212.png" />,Pattern(<img src="1484029173037.png" />).targetOffset(-<span class="dig">38</span>,-<span class="dig">2</span>))
+    click_click(Pattern(<img src="1484029203546.png" />).exact().targetOffset(-<span class="dig">57</span>,<span class="dig">1</span>),Pattern(<img src="1484029240476.png" />).targetOffset(-<span class="dig">41</span>,-<span class="dig">1</span>))
+    waitVanish_click(Pattern(<img src="1484029277359.png" />).targetOffset(<span class="dig">25</span>,<span class="dig">30</span>),Pattern(<img src="1484029277359.png" />).targetOffset(<span class="dig">25</span>,<span class="dig">30</span>))
+
+    status = <span class="str">"BackupSetup_TimeSetup"</span>
+    click_click(Pattern(<img src="1484029349565.png" />).targetOffset(<span class="dig">167</span>,<span class="dig">73</span>),Pattern(<img src="1484029382020.png" />).targetOffset(-<span class="dig">53</span>,-<span class="dig">13</span>))
+    <span class="skw">doubleClick</span>(<img src="1484029416250.png" />)
+    <span class="skw">click</span>(Pattern(<img src="1484029438876.png" />).targetOffset(-<span class="dig">35</span>,<span class="dig">1</span>))
+    status = <span class="str">"BackupSetup_Target"</span>
+    click_click_click(Pattern(<img src="1484029463734.png" />).targetOffset(<span class="dig">171</span>,<span class="dig">31</span>),Pattern(<img src="1484029491300.png" />).similar(<span class="dig">0.96</span>).targetOffset(-<span class="dig">33</span>,-<span class="dig">35</span>),Pattern(<img src="1484029529925.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">2</span>))
+    status = <span class="str">"BackupSetup_Storage"</span>
+    click_click(Pattern(<img src="1484029574945.png" />).targetOffset(<span class="dig">167</span>,<span class="dig">30</span>),<img src="1484029597521.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.DOWN)
+    <span class="skw">type</span>(Key.DOWN)
+    click_click_click(<img src="1484012731288.png" />,<img src="1484029731994.png" />,<img src="1484030159947.png" />)
+    waitVanish_click(<img src="1484030722944.png" />,<img src="1484030610390.png" />)
+    <span class="skw">click</span>(<img src="1484030265938.png" />)
+
+<span class="kw">try</span>:
+
+    BCK_Setup()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

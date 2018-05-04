@@ -1,0 +1,118 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Client_ReLogin.sikuli</h2> <a href="Client_ReLogin.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> success():
+    f=open(<span class="str">"c:/a/client.txt"</span>,<span class="str">'a'</span>)
+    f.write(s+<span class="str">"    ServiceDB Import complete!\n"</span>)
+    f.close()
+
+<span class="kw">def</span> failed():
+    f=open(<span class="str">"c:/a/client.txt"</span>,<span class="str">'a'</span>)
+    f.write(s+<span class="str">"    "</span>+<span class="str">" fail!\n"</span>)
+    f.close()
+
+
+<span class="kw">def</span> click_until_show(clickimage, showimage):
+    <span class="kw">while</span> <span class="kw">not</span> exists(showimage, <span class="dig">1</span>):
+        <span class="skw">click</span>(clickimage)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> play():
+    <span class="kw">while</span> True:
+        click_until_show(<img src="1486631807563.png" />, <img src="1486631839773.png" />)
+
+        hover(<img src="1486631726030.png" />)
+        <span class="skw">click</span>(<img src="1486631730312.png" />)
+        <span class="skw">click</span>(<img src="1486631735599.png" />)
+        <span class="kw">if</span> exists(Pattern(<img src="1486631859280.png" />).targetOffset(<span class="dig">33</span>,<span class="dig">122</span>),FOREVER):
+            <span class="skw">click</span>(Pattern(<img src="1486631859280.png" />).targetOffset(<span class="dig">33</span>,<span class="dig">122</span>))
+
+<span class="kw">try</span>:
+    Time()
+    f=open(<span class="str">"c:/a/client.txt"</span>,<span class="str">'w'</span>)
+    f.write(s+<span class="str">"    start!\n"</span>)
+    f.close()
+    play()
+
+<span class="kw">except</span> FindFailed:
+    Time()
+    failed()
+</pre>
+</body>
+</html>

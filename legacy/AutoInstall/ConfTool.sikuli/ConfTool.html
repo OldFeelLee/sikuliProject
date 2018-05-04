@@ -1,0 +1,194 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>ConfTool.sikuli</h2> <a href="ConfTool.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-</span>
+<span class="cmt">#! python</span>
+
+
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> ConfigConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+<span class="kw">def</span> untilShow_hover_click(clickImage,hoverImage, showImage):
+    <span class="skw">click</span>(clickImage)
+    <span class="kw">while</span> True:
+        hover(hoverImage)
+        <span class="kw">if</span> exists(clickImage,FOREVER):
+
+            <span class="kw">if</span> exists(showImage,<span class="dig">1</span>):
+                <span class="skw">click</span>(showImage)
+                <span class="kw">break</span>
+            <span class="kw">else</span>:
+                <span class="skw">click</span>(clickImage)
+
+
+<span class="kw">def</span> waitVanish_click(image):
+    <span class="skw">wait</span>(image, <span class="dig">10</span>)
+    <span class="kw">try</span>:
+        <span class="kw">while</span> exists(image, <span class="dig">10</span>):
+            <span class="skw">type</span>(image,Key.TAB+<span class="str">"12345678"</span>+Key.ENTER)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">except</span>:
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> Login(image):
+    <span class="kw">if</span> exists(image):
+        <span class="kw">while</span> exists(image,<span class="dig">10</span>):
+            <span class="skw">type</span>(image,Key.TAB+<span class="str">"12345678"</span>+Key.ENTER)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> wait_click(image):
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(image)
+
+
+<span class="kw">def</span> if_exists_click(image1, time, image2):
+    <span class="kw">if</span> exists(image1, time):
+        <span class="skw">click</span>(image2)
+
+
+
+<span class="kw">def</span> ConfToolStart():    <span class="cmt">#ConfTool login 및 device tab 이동</span>
+    <span class="kw">global</span> status
+    status = <span class="str">"ConfTool Login"</span>
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\OEM_Conf"</span>)
+    Login(<img src="1486617801030.png" />)
+    runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+
+
+
+<span class="kw">def</span> ScanMode(): <span class="cmt"># Scan mode 진입 및 IP Scan 선택</span>
+    <span class="kw">global</span> status
+    status = <span class="str">"Device Scan &amp; Add"</span>
+    <span class="skw">click</span>(<img src="1454380361915.png" />)
+    if_exists_click(<img src="1484099067019.png" />,FOREVER,Pattern(<img src="1454380412860.png" />).similar(<span class="dig">0.94</span>).targetOffset(<span class="dig">108</span>,-<span class="dig">25</span>))
+    <span class="kw">if</span> exists(Pattern(<img src="1454380987835.png" />).exact(),<span class="dig">2</span>):
+        wait_click(Pattern(<img src="1454380525571.png" />).similar(<span class="dig">0.91</span>))
+        wait_click(Pattern(<img src="1454380563437.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">70</span>,-<span class="dig">1</span>))
+        ip()
+        auto()
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+
+    <span class="kw">else</span>:
+        ip()
+        auto()
+        runScript(<span class="str">"C:\sikuli\script\AutoInstall\Conf_Loading"</span>)
+
+
+<span class="kw">def</span> ip(): <span class="cmt"># ip 입력    </span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1454380633509.png" />).targetOffset(-<span class="dig">36</span>,<span class="dig">0</span>))
+    <span class="skw">type</span>(ConfigConst.PEARL_IP)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> auto(): <span class="cmt"># DeviceScan 및 ID/PW 입력</span>
+    untilShow_hover_click(<img src="1454380656889.png" />,<img src="1484101583287.png" />, Pattern(<img src="1454381253425.png" />).exact().targetOffset(<span class="dig">8</span>,-<span class="dig">10</span>))
+    wait_click(<img src="1454381290995.png" />)
+    <span class="skw">wait</span>(<img src="1486602350491.png" />,<span class="dig">10</span>)
+    <span class="skw">type</span>(ConfigConst.PEARL_ID+Key.TAB) <span class="cmt">#ID!</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(ConfigConst.PEARL_PW) <span class="cmt"># PW</span>
+    wait_click(<img src="1461749295384.png" />)
+    wait_click(<img src="1455166085100.png" />)
+
+
+<span class="kw">try</span>:
+    ConfToolStart()
+    ScanMode()
+    Log(<span class="str">"TestResult"</span>, <span class="str">'a'</span>, errorConst.no_error)
+    exit(errorConst.no_error)
+<span class="kw">except</span> FindFailed:
+
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    exit(errorConst.error_1)
+<span class="cmt">#print a</span>
+
+</pre>
+</body>
+</html>

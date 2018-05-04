@@ -1,0 +1,196 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>LicenseAuth.sikuli</h2> <a href="LicenseAuth.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-</span>
+
+
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+<span class="kw">def</span> Serial(filename):
+    <span class="kw">global</span> setSerial
+    fr=open(filename+<span class="str">".txt"</span>).read()
+    setSerial=str(fr)
+
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> flagCheck==int(flag):
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" pass\n"</span>)
+        f.close()
+    <span class="kw">else</span>:
+        f.write(s+<span class="str">"    "</span>+status+<span class="str">" fail\n"</span>)
+        f.close()
+
+<span class="kw">def</span> licenseDel():
+    <span class="kw">global</span> status
+    status = <span class="str">"License Delete"</span>
+    App.open(<span class="str">"C:\sikuli\licenseDel.bat"</span>)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+
+<span class="kw">def</span> if_exists_click(image1,time,image2):
+    <span class="kw">if</span> exists(image1,time):
+        <span class="skw">click</span>(image2)
+<span class="str">'''
+def inputSerial():
+
+    global setSerial
+    setSerial=input(unicode("Serial Key를 입력하세요.","utf-8")) 
+'''</span>
+
+<span class="kw">def</span> OEM():
+    oem=open(<span class="str">"c:/sikuli/TestResult.txt"</span>).read(<span class="dig">1</span>)
+    <span class="kw">if</span> oem == <span class="str">"I"</span>:
+        App.open(<span class="str">"C:\sikuli\IDIS_License.bat"</span>)
+    <span class="kw">else</span>:
+        App.open(<span class="str">"C:\sikuli\Type1_License.bat"</span>)
+
+
+<span class="kw">def</span> OEM_Fake():
+    oem=open(<span class="str">"c:/sikuli/TestResult.txt"</span>).read(<span class="dig">1</span>)
+    <span class="kw">if</span> oem == <span class="str">"I"</span>:
+        App.open(<span class="str">"C:\sikuli\IDIS_License_Fake.bat"</span>)
+    <span class="kw">else</span>:
+        App.open(<span class="str">"C:\sikuli\Type1_License_Fake.bat"</span>)
+
+
+<span class="kw">def</span> LicenseTool():
+    <span class="kw">global</span> status
+<span class="cmt">#    inputSerial()</span>
+    status = <span class="str">"LicenseTool Run"</span>
+<span class="cmt">#    while not exists("1486615721253.png"):</span>
+<span class="cmt">#        wait(1)</span>
+<span class="cmt">#    click(Pattern("1486616289494.png").targetOffset(36,-2))</span>
+    OEM()
+
+    status = <span class="str">"License auth"</span>
+    if_exists_click(<img src="1486608642625.png" />,<span class="dig">600</span>,Pattern(<img src="1486608659482.png" />).similar(<span class="dig">0.90</span>))
+    <span class="skw">click</span>()
+    <span class="skw">type</span>(setSerial)
+<span class="cmt">#    type("NH52CPOLX4BTRCGNARF3GZOZT6MLRW")</span>
+    <span class="skw">click</span>()
+
+    if_exists_click(<img src="1486609670798.png" />,<span class="dig">60</span>,<img src="1486609034849-1.png" />)
+    if_exists_click(<img src="1486608964816.png" />,<span class="dig">5</span>,<img src="1486608983013.png" />)
+    <span class="skw">wait</span>(<span class="dig">20</span>)
+    OEM()
+    status = <span class="str">"License auth confirm"</span>
+    if_exists_click(<img src="1486608642625.png" />,<span class="dig">600</span>,<img src="1489130891767.png" />)
+    if_exists_click(<img src="1489131418715.png" />,<span class="dig">60</span>,<img src="1486609034849-1.png" />)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+<span class="kw">def</span> LicenseTool_FakeConfirm():
+    <span class="kw">global</span> status
+    status = <span class="str">"License Active_Fake Confirm"</span>
+    OEM_Fake()
+    status = <span class="str">"License Fake_auth confirm"</span>
+    if_exists_click(<img src="1486608642625.png" />,<span class="dig">600</span>,<img src="1489130891767.png" />)
+    if_exists_click(Pattern(<img src="1489133773238.png" />).similar(<span class="dig">0.81</span>),<span class="dig">90</span>,<img src="1486609034849-1.png" />)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+
+<span class="kw">def</span> LicenseTool_Fake():
+    <span class="kw">global</span> status
+
+    status = <span class="str">"LicenseTool Run"</span>
+    OEM_Fake()
+
+    status = <span class="str">"License Fake_auth"</span>
+    if_exists_click(<img src="1486608642625.png" />,<span class="dig">600</span>,Pattern(<img src="1486608659482.png" />).similar(<span class="dig">0.90</span>))
+    <span class="skw">click</span>()
+    <span class="skw">type</span>(setSerial)
+    <span class="skw">click</span>()
+    if_exists_click(Pattern(<img src="1489129049995.png" />).similar(<span class="dig">0.90</span>),<span class="dig">120</span>,<img src="1486609034849.png" />)
+
+<span class="kw">try</span>:
+    licenseDel()
+    Serial(<span class="str">"serial"</span>)
+    LicenseTool()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+    LicenseTool_FakeConfirm()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    licenseDel()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    LicenseTool_Fake()
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+</pre>
+</body>
+</html>

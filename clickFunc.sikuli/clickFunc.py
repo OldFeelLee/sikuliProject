@@ -17,6 +17,15 @@ def click_type(img1,str):
     type(str)
     wait(3)
 
+def click_type_type(img1,str1,str2):
+    click(img1)
+    wait(3)
+    type(str1)
+    wait(3)
+    type(str2)
+    wait(3)
+
+
 def click_click_click(img1,img2,img3):
     click(img1)
     wait(2)

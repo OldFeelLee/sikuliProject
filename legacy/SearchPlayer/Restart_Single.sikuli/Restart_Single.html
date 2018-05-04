@@ -1,0 +1,167 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Restart_Single.sikuli</h2> <a href="Restart_Single.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> errorConst
+
+<span class="kw">def</span> Time():
+    <span class="kw">global</span> s
+    today = datetime.datetime.now()
+    s = str(today)
+
+
+<span class="kw">def</span> Log(filename,mode,flag):
+    <span class="kw">global</span> flagCheck
+    <span class="kw">global</span> cnt
+    <span class="kw">global</span> cnt2
+
+    cntstr=str(cnt)
+    cntstr2=str(cnt2)
+    flagCheck=<span class="dig">0</span>
+    f=open(filename+<span class="str">".txt"</span>,mode)
+    Time()
+    <span class="kw">if</span> cnt ==<span class="dig">0</span>:
+        f.write(s+<span class="str">"    "</span>+<span class="str">" start\n"</span>)
+        f.close()
+        cnt = cnt + <span class="dig">1</span>
+    <span class="kw">else</span>:
+<span class="cmt">#        if flagCheck==int(flag): </span>
+        <span class="kw">if</span> int(flag) == errorConst.no_error:
+            f.write(s+<span class="str">"    "</span>+status+<span class="str">" "</span>+cntstr+<span class="str">"\n"</span>)
+            f.close()
+            cnt = cnt +<span class="dig">1</span>
+
+        <span class="kw">elif</span> int(flag) == errorConst.closeCount:
+            f.write(s+<span class="str">"    "</span>+status+<span class="str">" "</span>+cntstr2+<span class="str">"\n"</span>)
+            f.close()
+            cnt2 = cnt2 + <span class="dig">1</span>
+        <span class="kw">else</span>:
+            <span class="kw">if</span> status == errorConst.status_Open:
+                f.write(s+<span class="str">"    "</span>+status+<span class="str">" "</span>+cntstr+<span class="str">" fail\n"</span>)
+                f.close()
+            <span class="kw">else</span>:
+                f.write(s+<span class="str">"    "</span>+status+<span class="str">" "</span>+cntstr2+<span class="str">" fail\n"</span>)
+                f.close()
+
+
+
+<span class="kw">def</span> runTest():
+<span class="cmt">#    run("C:\bat\SearchPlayer_Restart.bat") </span>
+    <span class="kw">global</span> status
+<span class="cmt">#    if not exists ("1505979802016.png"):</span>
+    status = errorConst.status_Open
+<span class="cmt">#    status = "Open"</span>
+<span class="cmt">#    click(Pattern("1506473093233.png").similar(0.80))</span>
+    <span class="skw">type</span>(Pattern(<img src="1506473093233.png" />).similar(<span class="dig">0.80</span>),Key.UP)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="kw">if</span> exists(Pattern(<img src="1505979908040.png" />).similar(<span class="dig">0.97</span>),<span class="dig">200</span>):
+        Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    <span class="kw">elif</span> exists(<img src="1506416433740.png" />,<span class="dig">5</span>):
+        Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    <span class="kw">else</span>:
+        Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+        run(<span class="str">"C:\sikuli\gr1mailtest.bat"</span>)
+        exit()
+<span class="kw">def</span> closeTest():
+    <span class="kw">global</span> status
+<span class="cmt">#    status = "Close"</span>
+    status = errorConst.status_Close
+    <span class="skw">click</span>(Pattern(<img src="1505981200673.png" />).similar(<span class="dig">0.94</span>).targetOffset(<span class="dig">388</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.closeCount)
+
+<span class="kw">try</span>:
+    cnt = <span class="dig">0</span>
+    cnt2=<span class="dig">1</span>
+    Log(<span class="str">"TestResult"</span>,<span class="str">'w'</span>,errorConst.no_error)
+
+    <span class="kw">while</span> True:
+        runTest()
+
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+        runTest()
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+        runTest()
+        <span class="skw">wait</span>(<span class="dig">10</span>)
+
+        closeTest()
+
+
+<span class="kw">except</span> FindFailed:
+    Log(<span class="str">"TestResult"</span>,<span class="str">'a'</span>,errorConst.error_1)
+
+run(<span class="str">"C:\sikuli\gr1mailtest.bat"</span>)
+</pre>
+</body>
+</html>

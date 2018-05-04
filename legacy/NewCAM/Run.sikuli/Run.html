@@ -1,0 +1,656 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Run.sikuli</h2> <a href="Run.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> random
+<span class="kw">import</span> string
+
+<span class="kw">def</span> RanTime():    <span class="cmt">#random 시간</span>
+    ran = <span class="str">""</span>.join([random.choice(string.digits)])
+    s=int(ran)
+    <span class="skw">wait</span>(s)
+
+<span class="kw">def</span> Live_tab():
+    <span class="kw">if</span> exists(<img src="1455609384135.png" />):
+        <span class="skw">click</span>(Pattern(<img src="1455609384135.png" />).targetOffset(-<span class="dig">61</span>,-<span class="dig">63</span>))
+
+<span class="kw">def</span> DevicePaneDefine(): <span class="cmt">#device, pane 변수 정의 및 pane에 device 추가</span>
+    <span class="kw">global</span> pane
+    <span class="kw">global</span> device
+    <span class="kw">if</span> exists(Pattern(<img src="1455170393643.png" />).similar(<span class="dig">0.98</span>).targetOffset(<span class="dig">18</span>,<span class="dig">13</span>)):
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        device = <span class="skw">find</span>(Pattern(<img src="1455170393643.png" />).similar(<span class="dig">0.98</span>).targetOffset(<span class="dig">18</span>,<span class="dig">13</span>))
+        pane = <span class="skw">find</span>(<img src="1455258060501.png" />)
+        <span class="skw">dragDrop</span>(device,pane)
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+    <span class="kw">else</span>:
+        <span class="skw">click</span>(Pattern(<img src="1455170236648.png" />).similar(<span class="dig">0.85</span>).targetOffset(-<span class="dig">41</span>,-<span class="dig">1</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        device = <span class="skw">find</span>(Pattern(<img src="1455170393643.png" />).similar(<span class="dig">0.98</span>).targetOffset(<span class="dig">18</span>,<span class="dig">13</span>))
+        pane = <span class="skw">find</span>(<img src="1455258060501.png" />)
+        <span class="skw">dragDrop</span>(device,pane)
+        <span class="skw">wait</span>(<span class="dig">3</span>)
+
+<span class="kw">def</span> LayoutChange():    <span class="cmt">#layout 변경</span>
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">144</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">120</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">96</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">72</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">48</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">24</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">0</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">24</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">48</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">71</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">95</span>,-<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">120</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(<span class="dig">144</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455170817026.png" />).targetOffset(-<span class="dig">144</span>,-<span class="dig">1</span>))
+
+<span class="kw">def</span> MultiStreamLive(): <span class="cmt"># 멀티스트림_live</span>
+
+    <span class="skw">click</span>(Pattern(<img src="1455170817026-1.png" />).targetOffset(-<span class="dig">144</span>,-<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyDown(Key.CTRL+Key.SHIFT+Key.ALT)
+    <span class="skw">rightClick</span>(pane)
+    keyUp(Key.CTRL+Key.SHIFT+Key.ALT)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">rightClick</span>(pane)
+    hover(Pattern(<img src="1455255611112.png" />).targetOffset(-<span class="dig">12</span>,<span class="dig">20</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455527545395.png" />).targetOffset(-<span class="dig">34</span>,-<span class="dig">9</span>))
+    RanTime()
+    <span class="skw">rightClick</span>(pane)
+    hover(Pattern(<img src="1455255611112.png" />).targetOffset(-<span class="dig">12</span>,<span class="dig">20</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455527545395.png" />).targetOffset(-<span class="dig">31</span>,<span class="dig">13</span>))
+    RanTime()
+    <span class="skw">rightClick</span>(pane)
+    hover(Pattern(<img src="1455255611112.png" />).targetOffset(-<span class="dig">12</span>,<span class="dig">20</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455527545395.png" />).targetOffset(-<span class="dig">35</span>,-<span class="dig">9</span>))
+    RanTime()
+
+<span class="kw">def</span> PTZ_Check():<span class="cmt">#PTZ hoverToolbar 활성화</span>
+    <span class="skw">rightClick</span>(pane)
+    <span class="kw">if</span> exists(Pattern(<img src="1455602298583.png" />).exact()):
+        <span class="skw">click</span>(Pattern(<img src="1455258268564.png" />).targetOffset(-<span class="dig">32</span>,-<span class="dig">33</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1455257719963.png" />).targetOffset(-<span class="dig">160</span>,<span class="dig">1</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        PTZ_short()
+        PTZ_long()
+        PTZ_Preset_View()
+
+<span class="kw">def</span> PTZ_short():
+    <span class="cmt">#PTZ_short</span>
+    <span class="skw">click</span>(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">21</span>,<span class="dig">0</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455257755424.png" />).targetOffset(<span class="dig">20</span>,<span class="dig">1</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">2</span>,-<span class="dig">20</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">2</span>,<span class="dig">20</span>))
+    RanTime()
+    <span class="skw">click</span>(Pattern(<img src="1455257719963.png" />).targetOffset(<span class="dig">64</span>,<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259621742.png" />).targetOffset(<span class="dig">3</span>,-<span class="dig">98</span>))
+    <span class="skw">type</span>(Pattern(<img src="1455259397675.png" />).targetOffset(<span class="dig">15</span>,<span class="dig">0</span>),<span class="str">"short"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259712448.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">4</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259677162.png" />).targetOffset(<span class="dig">28</span>,<span class="dig">38</span>))
+<span class="kw">def</span> PTZ_long():
+    <span class="cmt">#PTZ_long</span>
+    hover(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">21</span>,<span class="dig">0</span>))
+    mouseDown(Button.LEFT)
+    RanTime()
+    mouseUp(Button.LEFT)
+    hover(Pattern(<img src="1455257755424.png" />).targetOffset(<span class="dig">20</span>,<span class="dig">1</span>))
+    mouseDown(Button.LEFT)
+    RanTime()
+    mouseUp(Button.LEFT)
+    hover(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">2</span>,-<span class="dig">20</span>))
+    mouseDown(Button.LEFT)
+    RanTime()
+    mouseUp(Button.LEFT)
+    hover(Pattern(<img src="1455257755424.png" />).targetOffset(-<span class="dig">2</span>,<span class="dig">20</span>))
+    mouseDown(Button.LEFT)
+    RanTime()
+    mouseUp(Button.LEFT)
+    <span class="skw">click</span>(Pattern(<img src="1455257719963.png" />).targetOffset(<span class="dig">64</span>,<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259621742.png" />).targetOffset(<span class="dig">3</span>,-<span class="dig">78</span>))
+    <span class="skw">type</span>(Pattern(<img src="1455259397675.png" />).targetOffset(<span class="dig">15</span>,<span class="dig">0</span>),<span class="str">"long"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259712448.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">4</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259677162.png" />).targetOffset(<span class="dig">28</span>,<span class="dig">38</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> PTZ_Preset_View(): <span class="cmt">#PTZ_Preset_View</span>
+    <span class="skw">click</span>(Pattern(<img src="1455257719963.png" />).targetOffset(<span class="dig">90</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259621742.png" />).targetOffset(<span class="dig">3</span>,-<span class="dig">98</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455259712448.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">4</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455257719963.png" />).targetOffset(<span class="dig">90</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455259621742.png" />).targetOffset(<span class="dig">3</span>,-<span class="dig">78</span>))
+    <span class="skw">click</span>(Pattern(<img src="1455259712448.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">4</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> ClientClose():    <span class="cmt">#client 종료</span>
+    <span class="skw">click</span>(Pattern(<img src="1455247054722.png" />).targetOffset(<span class="dig">58</span>,-<span class="dig">19</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455247091651.png" />).targetOffset(<span class="dig">30</span>,<span class="dig">41</span>))
+
+
+
+<span class="kw">def</span> DeviceDelete(): <span class="cmt">#장치 삭제</span>
+    <span class="skw">click</span>(<img src="1454380361915.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455166888313.png" />).exact().targetOffset(<span class="dig">16</span>,<span class="dig">18</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyDown(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyUp(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455166568291.png" />).targetOffset(<span class="dig">92</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1455166600239.png" />)
+
+<span class="kw">def</span> ip(): <span class="cmt"># ip 붙여넣기</span>
+    <span class="skw">click</span>(<img src="1454380633509.png" />)
+    keyDown(Key.CTRL+<span class="str">"v"</span>)
+    keyUp(Key.CTRL+<span class="str">"v"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="kw">def</span> auto(): <span class="cmt"># DeviceScan 및 ID/PW 입력</span>
+    <span class="skw">click</span>(<img src="1454380656889.png" />)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(<img src="1454380688887.png" />):
+            <span class="skw">click</span>(<img src="1454380656889.png" />)
+        <span class="kw">else</span>:
+            <span class="kw">break</span>
+    <span class="skw">click</span>(Pattern(<img src="1454381253425.png" />).exact().targetOffset(<span class="dig">8</span>,-<span class="dig">10</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1454381290995.png" />)
+    <span class="skw">type</span>(<span class="str">"admin"</span>+Key.TAB) <span class="cmt">#ID!</span>
+    <span class="skw">type</span>(<span class="str">""</span>) <span class="cmt"># PW</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1454381375243.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1455166085100.png" />)
+<span class="kw">def</span> ScanMode(): <span class="cmt">#DeviceScan mode 진입 및 IP Scan 선택</span>
+    <span class="skw">click</span>(Pattern(<img src="1454380412860.png" />).similar(<span class="dig">0.94</span>).targetOffset(<span class="dig">108</span>,-<span class="dig">25</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">if</span> exists(Pattern(<img src="1454380987835.png" />).exact()):
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1454380525571.png" />).similar(<span class="dig">0.91</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1454380563437.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">70</span>,-<span class="dig">1</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        ip()
+        auto()
+        <span class="skw">wait</span>(<span class="dig">10</span>)
+
+    <span class="kw">else</span>:
+        ip()
+        auto()
+        <span class="skw">wait</span>(<span class="dig">10</span>)
+<span class="kw">def</span> ConfToolStart():    <span class="cmt">#ip 복사 및 ConfTool 실행</span>
+
+    keyDown(Key.WIN+<span class="str">"r"</span>)
+    keyUp(Key.WIN+<span class="str">"r"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"notepad"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"10.0.127.194"</span>)    <span class="cmt"># ip 입력부분 카메라별로 수정 필요</span>
+    keyDown(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyUp(Key.CTRL+<span class="str">"a"</span>)
+    keyDown(Key.CTRL+<span class="str">"c"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyUp(Key.CTRL+<span class="str">"c"</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455263103828.png" />).similar(<span class="dig">0.59</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">type</span>(<span class="str">"12345678"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455263196292.png" />).targetOffset(<span class="dig">134</span>,<span class="dig">48</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1454380361915.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="kw">def</span> ClientStart():
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455169924492.png" />)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(Pattern(<img src="1455170137679.png" />).targetOffset(<span class="dig">150</span>,<span class="dig">48</span>)):
+            <span class="skw">click</span>(Pattern(<img src="1455170137679.png" />).targetOffset(<span class="dig">150</span>,<span class="dig">48</span>))
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="kw">while</span> True:
+                <span class="kw">if</span> exists(<img src="1455608640830.png" />):
+                    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+                <span class="kw">else</span>:
+                    <span class="kw">break</span>
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt">####################################################################################</span>
+<span class="cmt">#                        REC                                                       #</span>
+<span class="cmt">####################################################################################</span>
+<span class="kw">def</span> ScheduleRemove(): <span class="cmt"># 타임커버리지 스케쥴 삭제</span>
+    <span class="skw">click</span>(Pattern(<img src="1455171706961.png" />).similar(<span class="dig">0.91</span>).targetOffset(<span class="dig">37</span>,-<span class="dig">17</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455171762169.png" />).targetOffset(<span class="dig">96</span>,<span class="dig">45</span>))
+<span class="kw">def</span> ScheduleRemoveConfirm(): <span class="cmt">#녹화 스케쥴 삭제 후 확인</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173491577.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455181784487.png" />).targetOffset(<span class="dig">88</span>,<span class="dig">50</span>))
+
+<span class="kw">def</span> ConfToolEnter(): <span class="cmt">#ConfTool 진입</span>
+    <span class="skw">click</span>(Pattern(<img src="1455173660011.png" />).targetOffset(<span class="dig">21</span>,<span class="dig">11</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1455173674996.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> ScheduleEnter(): <span class="cmt">#녹화 스케쥴 진입</span>
+
+    <span class="skw">click</span>(Pattern(<img src="1455173842358-1.png" />).similar(<span class="dig">0.79</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455171580003.png" />).similar(<span class="dig">0.96</span>))
+<span class="kw">def</span> ScheduleTime():
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(<img src="1455171620067.png" />):
+            <span class="skw">doubleClick</span>(<img src="1455171620067.png" />)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            ScheduleRemove()
+
+    <span class="skw">click</span>(Pattern(<img src="1455171938827.png" />).similar(<span class="dig">0.97</span>).targetOffset(-<span class="dig">100</span>,<span class="dig">4</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455171985702.png" />).exact().targetOffset(-<span class="dig">1</span>,-<span class="dig">16</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> ScheduleCondition(): <span class="cmt">#변수 정의</span>
+    <span class="kw">global</span> AddCondition, AddAction, AddTarget
+    AddCondition = <span class="skw">find</span>(Pattern(<img src="1455172485495-1.png" />).similar(<span class="dig">0.91</span>))
+    AddAction = <span class="skw">find</span>(<img src="1455173045077-1.png" />)
+    AddTarget = <span class="skw">find</span>(<img src="1455173364880-1.png" />)
+<span class="kw">def</span> Timelapse():
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455172850705.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455173093607.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddTarget)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173395787.png" />).targetOffset(-<span class="dig">33</span>,-<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173491577.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+
+
+<span class="kw">def</span> StorageAdd():
+    <span class="skw">click</span>(<img src="1455517351203.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455517382205.png" />).similar(<span class="dig">0.86</span>).targetOffset(<span class="dig">2</span>,<span class="dig">9</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455517421567.png" />).targetOffset(<span class="dig">52</span>,-<span class="dig">15</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">if</span> exists(<img src="1455517778924.png" />):
+        <span class="skw">click</span>(<img src="1455517926695.png" />)
+    <span class="kw">else</span>:
+        <span class="skw">click</span>(Pattern(<img src="1455517462613.png" />).similar(<span class="dig">0.91</span>).targetOffset(-<span class="dig">101</span>,-<span class="dig">4</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">doubleClick</span>(<img src="1455517493970.png" />)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">type</span>(<span class="str">"40"</span>+Key.ENTER)
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1455517537753.png" />).targetOffset(<span class="dig">37</span>,<span class="dig">54</span>))
+        <span class="kw">while</span> True:
+            <span class="kw">if</span> exists(<img src="1455517592926.png" />):
+                <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="kw">else</span>:
+                <span class="kw">break</span>
+        <span class="skw">click</span>(<img src="1455517926695.png" />)
+
+
+<span class="kw">def</span> MultiStreamREC():     <span class="cmt">#녹화스트림 설정 (멀티스트림)</span>
+    <span class="skw">click</span>(<img src="1455256519427.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455166888313-1.png" />).exact().targetOffset(<span class="dig">16</span>,<span class="dig">18</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyDown(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    keyUp(Key.CTRL+<span class="str">"a"</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455166568291-1.png" />).targetOffset(<span class="dig">131</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455256741013.png" />).similar(<span class="dig">0.88</span>).targetOffset(<span class="dig">35</span>,<span class="dig">16</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Pattern(<img src="1455256780200.png" />).targetOffset(<span class="dig">138</span>,<span class="dig">32</span>),Key.DOWN)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.TAB)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455257029092.png" />).similar(<span class="dig">0.94</span>).targetOffset(-<span class="dig">32</span>,<span class="dig">15</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+
+
+<span class="kw">def</span> MotionEventREC():  <span class="cmt">#모션 이벤트 녹화설정   </span>
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455179326544.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173093607-1.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<img src="1455180983505.png" />,<span class="str">"10"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455181038281.png" />).targetOffset(<span class="dig">2</span>,-<span class="dig">14</span>))
+    <span class="skw">doubleClick</span>(AddTarget)
+
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-1.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173491577-1.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+
+
+<span class="kw">def</span> PreEventREC():
+    <span class="skw">click</span>(Pattern(<img src="1455241298474.png" />).exact().targetOffset(-<span class="dig">19</span>,-<span class="dig">79</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455241904922.png" />).targetOffset(-<span class="dig">111</span>,<span class="dig">16</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<img src="1455180983505.png" />,<span class="str">"20"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455181038281.png" />).targetOffset(<span class="dig">2</span>,-<span class="dig">14</span>))
+    <span class="skw">doubleClick</span>(AddTarget)
+
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-1.png" />).targetOffset(-<span class="dig">163</span>,-<span class="dig">22</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-1.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">14</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455241582641.png" />).targetOffset(-<span class="dig">6</span>,<span class="dig">0</span>))
+    <span class="cmt">#프리이벤트설정 끝</span>
+
+    <span class="skw">click</span>(Pattern(<img src="1455173491577-1.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> TargetREC():  <span class="cmt">#연동녹화설정   </span>
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(<img src="1455179326544.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173093607-1.png" />).targetOffset(-<span class="dig">1</span>,-<span class="dig">2</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<img src="1455180983505.png" />,<span class="str">"10"</span>+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455181038281.png" />).targetOffset(<span class="dig">2</span>,-<span class="dig">14</span>))
+    <span class="skw">doubleClick</span>(AddTarget)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-2.png" />).targetOffset(-<span class="dig">163</span>,-<span class="dig">22</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="skw">click</span>(Pattern(<img src="1455173395787-1.png" />).targetOffset(-<span class="dig">33</span>,-<span class="dig">1</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173451451-2.png" />).targetOffset(<span class="dig">58</span>,<span class="dig">13</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455173491577-1.png" />).targetOffset(-<span class="dig">47</span>,<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt">#########################################################################</span>
+<span class="cmt">#            Event                                                      #</span>
+<span class="cmt">#########################################################################</span>
+
+<span class="kw">def</span> EventScheduleEnter():
+    <span class="skw">click</span>(Pattern(<img src="1455520876672.png" />).similar(<span class="dig">0.90</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455171580003-1.png" />).similar(<span class="dig">0.96</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> exists(<img src="1455171620067.png" />):
+            <span class="skw">doubleClick</span>(<img src="1455171620067.png" />)
+            <span class="skw">wait</span>(<span class="dig">1</span>)
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            ScheduleRemove()
+
+    <span class="skw">click</span>(Pattern(<img src="1455171938827.png" />).similar(<span class="dig">0.97</span>).targetOffset(-<span class="dig">100</span>,<span class="dig">4</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455171985702.png" />).exact().targetOffset(-<span class="dig">1</span>,-<span class="dig">16</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> EventScheduleAdd():
+    <span class="skw">doubleClick</span>(AddCondition)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455521242599.png" />).targetOffset(-<span class="dig">9</span>,-<span class="dig">108</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(<span class="str">"Event"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455521392387.png" />).similar(<span class="dig">0.91</span>).targetOffset(-<span class="dig">33</span>,-<span class="dig">32</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455521624129.png" />).targetOffset(-<span class="dig">63</span>,-<span class="dig">16</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(Pattern(<img src="1455521654531.png" />).targetOffset(<span class="dig">126</span>,<span class="dig">58</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455521710124.png" />).targetOffset(-<span class="dig">121</span>,<span class="dig">53</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455521890545.png" />).targetOffset(-<span class="dig">34</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">if</span> exists(<img src="1455528931080.png" />):
+        <span class="skw">click</span>(Pattern(<img src="1455528931080.png" />).targetOffset(<span class="dig">151</span>,<span class="dig">54</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1455521890545.png" />).targetOffset(<span class="dig">49</span>,<span class="dig">0</span>))
+        <span class="skw">wait</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(Pattern(<img src="1455529082085.png" />).similar(<span class="dig">0.94</span>))
+        <span class="skw">click</span>(Pattern(<img src="1455521965823.png" />).targetOffset(-<span class="dig">8</span>,-<span class="dig">13</span>))
+    <span class="kw">else</span>:
+        <span class="skw">click</span>(Pattern(<img src="1455521965823.png" />).targetOffset(-<span class="dig">8</span>,-<span class="dig">13</span>))
+
+<span class="kw">def</span> EventAck():
+    <span class="skw">doubleClick</span>(AddAction)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455522070019.png" />).targetOffset(<span class="dig">139</span>,-<span class="dig">38</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.UP+Key.TAB+Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">doubleClick</span>(AddTarget)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455522226522.png" />).similar(<span class="dig">0.79</span>).targetOffset(-<span class="dig">27</span>,<span class="dig">12</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455522306548.png" />).exact().targetOffset(<span class="dig">3</span>,<span class="dig">37</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455522343110.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">43</span>,<span class="dig">18</span>))
+
+<span class="cmt">#play</span>
+
+<span class="kw">def</span> EventSearch():  <span class="cmt">#Event Search</span>
+    <span class="skw">click</span>(Pattern(<img src="1455247174956.png" />).targetOffset(-<span class="dig">32</span>,-<span class="dig">3</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1455247229883.png" />)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> Play(): <span class="cmt">#Play button 변수 정의 및 play</span>
+    PlayButton = <span class="skw">find</span>(Pattern(<img src="1455247337212.png" />).similar(<span class="dig">0.91</span>).targetOffset(-<span class="dig">122</span>,-<span class="dig">1</span>))
+
+    <span class="skw">click</span>(Pattern(<img src="1455247288196.png" />).similar(<span class="dig">0.93</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(PlayButton)
+    <span class="skw">wait</span>(<span class="dig">10</span>)
+    <span class="skw">click</span>(Pattern(<img src="1455247288196.png" />).similar(<span class="dig">0.93</span>))
+    <span class="skw">type</span>(Key.DOWN)
+    <span class="skw">click</span>(PlayButton)
+    <span class="skw">wait</span>(<span class="dig">10</span>)
+
+<span class="kw">def</span> Play_tab():
+    <span class="skw">click</span>(Pattern(<img src="1455244535740.png" />).targetOffset(<span class="dig">8</span>,<span class="dig">18</span>))
+
+
+<span class="cmt">#try:</span>
+<span class="cmt">#    ConfToolStart()</span>
+<span class="cmt">#except FindFailed:</span>
+<span class="cmt">#    popup ("notepad or ConfTool Not Find")</span>
+
+<span class="cmt">#popup("ConfTool Start")</span>
+<span class="cmt">#wait(3)</span>
+<span class="cmt">#type(Key.ENTER)</span>
+<span class="cmt">#ConfToolStart()</span>
+
+<span class="cmt"># 장치 등록 및 Live(MultiStream)</span>
+
+<span class="cmt">#ScanMode()</span>
+<span class="cmt">#ClientStart()</span>
+<span class="cmt">#Live_tab()</span>
+<span class="cmt">#DevicePaneDefine()</span>
+<span class="cmt">#LayoutChange()</span>
+<span class="cmt">#MultiStreamLive()</span>
+
+<span class="cmt"># PTZ</span>
+
+PTZ_Check()
+
+
+ConfToolEnter()
+EventScheduleEnter()
+ScheduleCondition()
+EventScheduleAdd()
+EventAck()
+
+
+<span class="cmt"># REC</span>
+ConfToolEnter()
+StorageAdd()
+ScheduleEnter()
+ScheduleTime()
+ScheduleCondition()
+
+<span class="cmt"># Timelapse</span>
+Timelapse()
+
+<span class="cmt"># MultiStream, PreEvent, Event</span>
+
+
+MultiStreamREC()
+
+ScheduleEnter()
+ScheduleTime()
+ScheduleCondition()
+
+MotionEventREC()
+
+ScheduleEnter()
+PreEventREC()
+
+ScheduleEnter()
+ScheduleTime()
+TargetREC()
+
+
+Play_tab()
+DevicePaneDefine()
+EventSearch()
+Play()
+
+
+ConfToolEnter()
+DeviceDelete()
+ClientClose()
+</pre>
+</body>
+</html>

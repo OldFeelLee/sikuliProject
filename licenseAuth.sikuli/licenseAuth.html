@@ -82,6 +82,7 @@
 <span class="kw">import</span> existsFunc
 <span class="kw">import</span> ConfTool
 <span class="kw">import</span> os
+<span class="kw">import</span> typeFunc
 
 <span class="kw">def</span> Serial(filename):
     <span class="kw">global</span> setSerial
@@ -105,10 +106,15 @@
     App.open(<span class="str">"C:\sikuli\IDIS_License.bat"</span>)
     <span class="skw">wait</span>(<span class="dig">10</span>)
     fileLog.status = <span class="str">"License auth"</span>
-    existsFunc.exists_click_click(<img src="1486608642625.png" />,<img src="1525848389391.png" />,Pattern(<img src="1525848401646.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">16</span>,-<span class="dig">1</span>))
+    existsFunc.exists_click_click(<img src="1486608642625.png" />,Pattern(<img src="1525850049206.png" />).similar(<span class="dig">0.94</span>),Pattern(<img src="1525848401646.png" />).similar(<span class="dig">0.84</span>).targetOffset(-<span class="dig">16</span>,-<span class="dig">1</span>))
 
-    clickFunc.click_type(<img src="1525848424164.png" />,setSerial)
-    clickFunc.click_wait_click(<img src="1525848538644.png" />,<img src="1525848552081.png" />,<span class="dig">60</span>)
+    <span class="cmt">#clickFunc.click_click(Pattern("1527476826252.png").similar(0.75),"1486608642625.png")</span>
+    clickFunc.click_type(Pattern(<img src="1527476826252.png" />).similar(<span class="dig">0.75</span>),setSerial)
+    hover(<img src="1486608642625.png" />)
+<span class="cmt">#    wait(3600)</span>
+<span class="cmt">#    clickFunc.click_click("1527474242658.png","1527475995704.png")</span>
+<span class="cmt">#    typeFunc.type_hover(setSerial,"1486608642625.png")</span>
+    clickFunc.click_wait_click(<img src="1525848538644.png" />,<img src="1525848552081.png" />,<span class="dig">30</span>)
     <span class="skw">click</span>(<img src="1525848559525.png" />)
 
 
@@ -119,11 +125,12 @@
     Serial(<span class="str">"serial"</span>)
     <span class="kw">while</span> True:
         LicenseTool()
-        fileLog.Log(<span class="str">"LicenseAuth"</span>,<span class="str">'a'</span>,errorConst.no_error)
-
+        fileLog.Log(<span class="str">"LicenseAuth_06.04-06.11"</span>,<span class="str">'a'</span>,errorConst.no_error)
+        licenseDel()
 
 <span class="kw">except</span> FindFailed:
-    fileLog.Log(<span class="str">"LicenseAuth"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    fileLog.Log(<span class="str">"LicenseAuth_06.04-06.11"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    App.open(<span class="str">"gr1mailtest.bat"</span>)
 </pre>
 </body>
 </html>

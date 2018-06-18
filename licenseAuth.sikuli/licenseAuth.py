@@ -10,6 +10,7 @@ import clickFunc
 import existsFunc
 import ConfTool
 import os
+import typeFunc
 
 def Serial(filename):
     global setSerial   
@@ -33,10 +34,15 @@ def LicenseTool():
     App.open("C:\sikuli\IDIS_License.bat")
     wait(10)    
     fileLog.status = "License auth"    
-    existsFunc.exists_click_click("1486608642625.png","1525848389391.png",Pattern("1525848401646.png").similar(0.84).targetOffset(-16,-1))
-    
-    clickFunc.click_type("1525848424164.png",setSerial)
-    clickFunc.click_wait_click("1525848538644.png","1525848552081.png",60)    
+    existsFunc.exists_click_click("1486608642625.png",Pattern("1525850049206.png").similar(0.94),Pattern("1525848401646.png").similar(0.84).targetOffset(-16,-1))    
+ 
+    #clickFunc.click_click(Pattern("1527476826252.png").similar(0.75),"1486608642625.png")
+    clickFunc.click_type(Pattern("1527476826252.png").similar(0.75),setSerial)
+    hover("1486608642625.png")
+#    wait(3600)
+#    clickFunc.click_click("1527474242658.png","1527475995704.png")
+#    typeFunc.type_hover(setSerial,"1486608642625.png")
+    clickFunc.click_wait_click("1525848538644.png","1525848552081.png",30)    
     click("1525848559525.png")
 
 
@@ -47,10 +53,11 @@ try:
     Serial("serial")
     while True:
         LicenseTool()
-        fileLog.Log("LicenseAuth",'a',errorConst.no_error)
-
+        fileLog.Log("LicenseAuth_06.04-06.11",'a',errorConst.no_error)
+        licenseDel()
 
 except FindFailed:
-    fileLog.Log("LicenseAuth",'a',errorConst.error_1)     
+    fileLog.Log("LicenseAuth_06.04-06.11",'a',errorConst.error_1)
+    App.open("gr1mailtest.bat")
 
  

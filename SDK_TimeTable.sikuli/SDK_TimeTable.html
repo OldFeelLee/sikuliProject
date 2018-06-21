@@ -67,45 +67,44 @@
    </head>
 <body>
 <div class="info">
-<h2>clickFunc.sikuli</h2> <a href="clickFunc.zip">(Download this script)</a>
+<h2>SDK_TimeTable.sikuli</h2> <a href="SDK_TimeTable.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> fileLog
+<span class="kw">import</span> clickFunc
 
-<span class="kw">def</span> click_click(img1,img2):
-    <span class="skw">click</span>(img1)
+
+<span class="kw">def</span> aliveCheck(imge1,imge2):
+
+    <span class="skw">click</span>(imge1)
     <span class="skw">wait</span>(<span class="dig">2</span>)
-    <span class="skw">click</span>(img2)
-    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">if</span> <span class="kw">not</span> exists(imge2):
+        <span class="kw">return</span> True
 
-<span class="kw">def</span> click_wait_click(img1,img2,waitTime):
-    <span class="skw">click</span>(img1)
-    <span class="skw">wait</span>(waitTime)
-    <span class="skw">click</span>(img2)
-    <span class="skw">wait</span>(waitTime)
+<span class="kw">try</span>:
+    fileLog.cnt = <span class="dig">0</span>
+    fileLog.status = None
+    fileLog.Log(<span class="str">"sdk_evt"</span>,<span class="str">'a'</span>,errorConst.no_error)
 
-<span class="kw">def</span> click_type(img1,str):
-    <span class="skw">click</span>(img1)
-    <span class="skw">wait</span>(<span class="dig">3</span>)
-    <span class="skw">type</span>(str)
-    <span class="skw">wait</span>(<span class="dig">3</span>)
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> aliveCheck(<img src="1529568159493.png" />,Pattern(<img src="1529568212403.png" />).exact().targetOffset(<span class="dig">3</span>,<span class="dig">3</span>))== True:
 
-<span class="kw">def</span> click_type_type(img1,str1,str2):
-    <span class="skw">click</span>(img1)
-    <span class="skw">wait</span>(<span class="dig">3</span>)
-    <span class="skw">type</span>(str1)
-    <span class="skw">wait</span>(<span class="dig">3</span>)
-    <span class="skw">type</span>(str2)
-    <span class="skw">wait</span>(<span class="dig">3</span>)
+            <span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">0</span>,<span class="dig">10</span>):
+                clickFunc.click_click(<img src="1529568260274.png" />,Pattern(<img src="1529568212403.png" />).exact().targetOffset(<span class="dig">3</span>,<span class="dig">3</span>))
+                <span class="skw">wait</span>(<span class="dig">2</span>)
+
+                fileLog.Log(<span class="str">"sdk_evt"</span>,<span class="str">'a'</span>,errorConst.no_error)
+        <span class="kw">else</span>:
+
+            fileLog.Log(<span class="str">"sdk_evt"</span>,<span class="str">'a'</span>,errorConst.error_1)
+            <span class="kw">break</span>
 
 
-<span class="kw">def</span> click_click_click(img1,img2,img3):
-    <span class="skw">click</span>(img1)
-    <span class="skw">wait</span>(<span class="dig">2</span>)
-    <span class="skw">click</span>(img2)
-    <span class="skw">wait</span>(<span class="dig">2</span>)
-    <span class="skw">click</span>(img3)
-    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">except</span> FindFailed:
+
+    fileLog.Log(<span class="str">"sdk_evt"</span>,<span class="str">'a'</span>,errorConst.error_1)
 </pre>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from sikuli import *
+
 def click_click(img1,img2):
-    click(img1)
+    click(img1) 
     wait(2)
     click(img2)
     wait(2)

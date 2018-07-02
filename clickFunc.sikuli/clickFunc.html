@@ -71,10 +71,14 @@
 </div>
 <pre class="sikuli-code">
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> fileLog
+
 
 <span class="kw">def</span> click_click(img1,img2):
+    fileLog.status = <span class="str">"click1"</span>
     <span class="skw">click</span>(img1)
     <span class="skw">wait</span>(<span class="dig">2</span>)
+    fileLog.status = <span class="str">"click2"</span>
     <span class="skw">click</span>(img2)
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
@@ -84,18 +88,34 @@
     <span class="skw">click</span>(img2)
     <span class="skw">wait</span>(waitTime)
 
+<span class="kw">def</span> click_wait_doubleClick(img1,img2,waitTime):
+    <span class="skw">click</span>(img1)
+    <span class="skw">wait</span>(waitTime)
+    <span class="skw">doubleClick</span>(img2)
+    <span class="skw">wait</span>(waitTime)
+
 <span class="kw">def</span> click_type(img1,str):
     <span class="skw">click</span>(img1)
     <span class="skw">wait</span>(<span class="dig">3</span>)
     <span class="skw">type</span>(str)
     <span class="skw">wait</span>(<span class="dig">3</span>)
 
-<span class="kw">def</span> click_type_type(img1,str1,str2):
+
+<span class="kw">def</span> click_type_hover_(img1,str,hoverImg):
     <span class="skw">click</span>(img1)
     <span class="skw">wait</span>(<span class="dig">3</span>)
-    <span class="skw">type</span>(str1)
+    <span class="skw">type</span>(str)
     <span class="skw">wait</span>(<span class="dig">3</span>)
-    <span class="skw">type</span>(str2)
+    hover(hoverImg)
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+
+
+<span class="kw">def</span> click_type_hover(img1,str,hoverImg):
+    <span class="skw">click</span>(img1)
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+    <span class="skw">type</span>(str)
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+    hover(hoverImg)
     <span class="skw">wait</span>(<span class="dig">3</span>)
 
 
@@ -105,6 +125,14 @@
     <span class="skw">click</span>(img2)
     <span class="skw">wait</span>(<span class="dig">2</span>)
     <span class="skw">click</span>(img3)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> click_click_type(img1, img2, str1):
+    <span class="skw">click</span>(img1)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(img2)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">type</span>(str1)
     <span class="skw">wait</span>(<span class="dig">2</span>)
 </pre>
 </body>

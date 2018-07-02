@@ -70,111 +70,41 @@
 <h2>DBExport.sikuli</h2> <a href="DBExport.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">import</span> datetime
-<span class="kw">import</span> random
 <span class="kw">import</span> string
 <span class="kw">import</span> errorConst
-
-<span class="kw">def</span> RanTime():    <span class="cmt">#random 시간</span>
-    ran = <span class="str">""</span>.join([random.choice(string.digits)])
-    s=int(ran)
-    <span class="skw">wait</span>(s)
-
-<span class="kw">def</span> Time():    <span class="cmt">#get current time</span>
-    <span class="kw">global</span> s
-    today = datetime.datetime.now()
-    s = str(today)
-
-<span class="kw">def</span> Log(filename,mode,flag):     <span class="cmt">#result log</span>
-    <span class="kw">global</span> cnt
-
-    cntstr =str(cnt)
-    statusStr = str(status)
-    f=open(filename+<span class="str">".txt"</span>,mode)
-    Time()
-    <span class="kw">if</span> cnt==<span class="dig">0</span>:
-        f.write(s+<span class="str">"    "</span>+<span class="str">" start\n"</span>)
-        f.close()
-        cnt = cnt + <span class="dig">1</span>
-    <span class="kw">else</span>:
-        <span class="kw">if</span> flag==errorConst.no_error:
-            f.write(s+<span class="str">"    "</span>+statusStr+<span class="str">"    "</span>+cntstr+<span class="str">" pass\n"</span>)
-            f.close()
-            cnt = cnt + <span class="dig">1</span>
-        <span class="kw">else</span>:
-            f.write(s+<span class="str">"    "</span>+statusStr+<span class="str">"    "</span>+cntstr+<span class="str">" fail\n"</span>)
-            f.close()
-<span class="kw">def</span> exists_click(img):
-    <span class="kw">if</span> exists(img):
-        <span class="skw">click</span>(img)
-        <span class="skw">wait</span>(<span class="dig">1</span>)
-
-<span class="kw">def</span> ConfLogIn():
-    <span class="kw">global</span> status
-    status = <span class="str">"ConfTool LogIn"</span>
-    <span class="kw">while</span> exists(Pattern(<img src="1516587526564.png" />).targetOffset(<span class="dig">26</span>,<span class="dig">124</span>)):
-        exists_click(Pattern(<img src="1516587526564.png" />).targetOffset(<span class="dig">26</span>,<span class="dig">124</span>))
-        <span class="skw">wait</span>(<span class="dig">5</span>)
-
-    ConfToolLoading()
-
-<span class="kw">def</span> ConfToolLoading(): <span class="cmt">#ConfTool에 설정 적용 wait</span>
-    <span class="kw">while</span> <span class="kw">not</span> exists(<img src="1484098904026.png" />):
-        <span class="skw">click</span>(<img src="1484098830091.png" />)
-        <span class="skw">type</span>(Key.ENTER)
-        <span class="skw">wait</span>(<span class="dig">1</span>)
-
-
+<span class="kw">import</span> currentTime
+<span class="kw">import</span> fileLog
+<span class="kw">import</span> clickFunc
+<span class="kw">import</span> existsFunc
+<span class="kw">import</span> ConfTool
+<span class="kw">import</span> forFunc
+<span class="kw">import</span> randomFunc
+<span class="kw">import</span> runningCheck
 
 <span class="kw">def</span> DBExport():
-    <span class="kw">global</span> status
-    status = <span class="str">"DBExport Setting"</span>
-    <span class="skw">click</span>(<img src="1486459824465.png" />)
-    <span class="skw">click</span>(<img src="1486459847185.png" />)
-    <span class="skw">type</span>(Key.ENTER)
 
-    <span class="kw">if</span> exists(<img src="1486516622854.png" />,<span class="dig">600</span>):
-        <span class="skw">click</span>(<img src="1486516654143.png" />)
+    fileLog.status = <span class="str">"DBExport Setting"</span>
+    clickFunc.click_click_type(Pattern(<img src="1486459824465.png" />).similar(<span class="dig">0.69</span>),Pattern(<img src="1486459847185.png" />).similar(<span class="dig">0.88</span>),Key.ENTER)
+    <span class="kw">if</span> existsFunc.exists_click_type(<img src="1486516622854.png" />,<img src="1486516654143.png" />,<span class="str">"ExportTest.iexp"</span>+Key.ENTER) == True:
+        existsFunc.exists_click(Pattern(<img src="1517384078551.png" />).targetOffset(<span class="dig">45</span>,<span class="dig">32</span>))
 
-        <span class="skw">type</span>(Pattern(<img src="1486516726920.png" />).similar(<span class="dig">0.90</span>),<span class="str">"ExportTest.iexp"</span>+Key.ENTER)
-        <span class="kw">if</span> exists(Pattern(<img src="1517384078551.png" />).targetOffset(<span class="dig">45</span>,<span class="dig">32</span>),<span class="dig">30</span>):
-            <span class="skw">click</span>(Pattern(<img src="1517384078551.png" />).targetOffset(<span class="dig">45</span>,<span class="dig">32</span>))
-        status = <span class="str">"DBExporting"</span>
-    <span class="kw">if</span> exists(Pattern(<img src="1486516821324.png" />).similar(<span class="dig">0.77</span>),<span class="dig">600</span>):
-        <span class="skw">type</span>(Key.ENTER)
-    <span class="skw">wait</span>(<span class="dig">1</span>)
-    Log(<span class="str">"DBExport_02.05-02.12"</span>,<span class="str">'a'</span>,errorConst.no_error)
+        fileLog.status = <span class="str">"DBExporting"</span>
+    existsFunc.exists_type(Pattern(<img src="1486516821324.png" />).similar(<span class="dig">0.77</span>),Key.ENTER)
+    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.no_error)
     <span class="skw">wait</span>(<span class="dig">5</span>)
 <span class="kw">try</span>:
-    <span class="kw">global</span> cnt
-    <span class="kw">global</span> status
-    status = <span class="str">"Init"</span>
-    cnt = <span class="dig">0</span>
-    Log(<span class="str">"DBExport_02.05-02.12"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    fileLog.cnt = <span class="dig">0</span>
+    fileLog.status = None
+
+    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
     <span class="kw">while</span> True :
+        <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool"</span>) == True:
+            ConfTool.Open()
         DBExport()
-        Time()
-        date_temp=list(s)[<span class="dig">8</span>:<span class="dig">10</span>]
-        tempInt = [int(x) <span class="kw">for</span> x <span class="kw">in</span> date_temp]
-        <span class="kw">if</span> tempInt[<span class="dig">0</span>] &gt;=<span class="dig">1</span> <span class="kw">and</span> tempInt[<span class="dig">1</span>] &gt;=<span class="dig">2</span>:
-            <span class="kw">break</span>
 
 <span class="kw">except</span> FindFailed:
-    Log(<span class="str">"DBExport_02.05-02.12"</span>,<span class="str">'a'</span>,errorConst.error_1)
-    App.open(<span class="str">"C:\IDIS Solution Suite\Client\G2ConfTool.exe"</span>)
-    <span class="skw">wait</span>(<span class="dig">5</span>)
-    App.focus(<span class="str">"C:\IDIS Solution Suite\Client\G2ConfTool.exe"</span>)
-    <span class="skw">wait</span>(<span class="dig">1</span>)
-    <span class="kw">if</span> exists(Pattern(<img src="1516587526564.png" />).targetOffset(<span class="dig">26</span>,<span class="dig">124</span>),<span class="dig">30</span>):
-        ConfLogIn()
-run(<span class="str">"C:\sikuli\gr1mailtest_export.bat"</span>)
-Time()
-date_temp=list(s)[<span class="dig">8</span>:<span class="dig">10</span>]
-tempInt = [int(x) <span class="kw">for</span> x <span class="kw">in</span> date_temp]
-<span class="kw">if</span> tempInt[<span class="dig">0</span>] &gt;=<span class="dig">1</span> <span class="kw">and</span> tempInt[<span class="dig">1</span>] &gt;=<span class="dig">2</span>:
-    runScript(<span class="str">"C:\sikuli\script\DBImport.sikuli"</span>)
-<span class="kw">else</span>:
-    runScript(<span class="str">"C:\sikuli\script\DBExport.sikuli"</span>)
+    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.error_1)
 </pre>
 </body>
 </html>

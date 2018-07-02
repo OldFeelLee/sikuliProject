@@ -71,10 +71,17 @@
 </div>
 <pre class="sikuli-code">
 <span class="kw">import</span> random
+<span class="kw">import</span> datetime
 
-<span class="kw">def</span> ranNumber():
+<span class="kw">def</span> ranNumber(t1,t2):
     <span class="kw">global</span> ranTime
-    ranTime = random.randrange(<span class="dig">1</span>,<span class="dig">10</span>)
+    ranTime = random.randrange(t1,t2)
+
+
+<span class="kw">def</span> RanTime():
+    ran = <span class="str">""</span>.join([random.choice(string.digits)])
+    s=int(ran)
+    <span class="skw">wait</span>(s)
 </pre>
 </body>
 </html>

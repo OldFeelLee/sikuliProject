@@ -89,14 +89,16 @@
     pane = <span class="skw">find</span>(<img src="1529289965951.png" />)
     layout = <span class="skw">find</span>(Pattern(<img src="1529290040773.png" />).similar(<span class="dig">0.95</span>).targetOffset(<span class="dig">8</span>,<span class="dig">10</span>))
     device = <span class="skw">find</span>(Pattern(<img src="device.png" />).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">7</span>,<span class="dig">9</span>))
-    randomFunc.ranNumber()
+
     <span class="kw">while</span> True:
+
         fileLog.status = <span class="str">"device"</span>
         <span class="skw">dragDrop</span>(device,pane)
         <span class="skw">wait</span>(<span class="dig">5</span>)
         fileLog.status = <span class="str">"device drag"</span>
         <span class="kw">if</span> forFunc.for_click_click(Pattern(<img src="1529290607934.png" />).similar(<span class="dig">0.96</span>).targetOffset(-<span class="dig">7</span>,<span class="dig">3</span>),Pattern(<img src="1529288997453.png" />).targetOffset(-<span class="dig">22</span>,<span class="dig">3</span>),<span class="dig">1</span>) == True :
             fileLog.status = <span class="str">"layout"</span>
+            randomFunc.ranNumber(<span class="dig">10</span>,<span class="dig">300</span>)
             <span class="skw">wait</span>(randomFunc.ranTime)
             <span class="skw">dragDrop</span>(layout,pane)
             fileLog.status = <span class="str">"layout drag"</span>
@@ -105,16 +107,16 @@
             fileLog.status = <span class="str">"layt"</span>
         <span class="kw">if</span> forFunc.for_click_click(Pattern(<img src="1529290607934.png" />).similar(<span class="dig">0.96</span>).targetOffset(-<span class="dig">7</span>,<span class="dig">3</span>),Pattern(<img src="1529288997453.png" />).targetOffset(-<span class="dig">22</span>,<span class="dig">3</span>),<span class="dig">1</span>) == True :
             fileLog.status = <span class="str">"pane"</span>
+            randomFunc.ranNumber(<span class="dig">10</span>,<span class="dig">300</span>)
             <span class="skw">wait</span>(randomFunc.ranTime)
             <span class="skw">rightClick</span>(pane)
             clickFunc.click_click(<img src="1529290226726.png" />,<img src="1529290237097.png" />)
             fileLog.status = <span class="str">"clear"</span>
 
-        fileLog.Log(<span class="str">"PlayTab_device&amp;layout_06.18-06.25"</span>,<span class="str">'a'</span>,errorConst.no_error)
-
+        fileLog.Log(<span class="str">"PlayTab_device&amp;layout_06.25-07.02"</span>,<span class="str">'a'</span>,errorConst.no_error)
 
 <span class="kw">except</span> FindFailed:
-    fileLog.Log(<span class="str">"PlayTab_device&amp;layout_06.18-06.25"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    fileLog.Log(<span class="str">"PlayTab_device&amp;layout_06.25-07.02"</span>,<span class="str">'a'</span>,errorConst.error_1)
 </pre>
 </body>
 </html>

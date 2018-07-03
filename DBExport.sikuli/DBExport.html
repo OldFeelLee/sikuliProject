@@ -99,7 +99,7 @@
     fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.no_error)
 
     <span class="kw">while</span> True :
-        <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool"</span>) == True:
+        <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool"</span>) == False:
             ConfTool.Open()
         DBExport()
 

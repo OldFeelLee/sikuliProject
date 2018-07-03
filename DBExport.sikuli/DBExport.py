@@ -27,7 +27,7 @@ try:
     fileLog.Log("DBExport_07.02-07.09",'a',errorConst.no_error)
 
     while True : 
-        if runningCheck.running("G2ConfTool") == True:
+        if runningCheck.running("G2ConfTool") == False:
             ConfTool.Open()
         DBExport()
  

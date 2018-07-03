@@ -90,12 +90,30 @@
     <span class="kw">while</span> <span class="kw">not</span> exists(showImage):
         <span class="skw">wait</span>(<span class="dig">2</span>)
 
+<span class="kw">def</span> exists_click(showimg):
+    <span class="kw">if</span> exists(showimg,<span class="dig">30</span>):
+        <span class="skw">click</span>(showimg)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> exists_type(showimg,str1):
+    <span class="kw">if</span> exists(showimg,<span class="dig">300</span>):
+        <span class="skw">type</span>(str1)
+
+
 <span class="kw">def</span> exists_click_click(showimg,clickimg1,clickimg2):
     <span class="kw">if</span> exists(showimg):
         <span class="skw">click</span>(clickimg1)
         <span class="skw">wait</span>(<span class="dig">2</span>)
         <span class="skw">click</span>(clickimg2)
         <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> exists_click_type(showimg,clickimg1,str1):
+    <span class="kw">if</span> exists(showimg,<span class="dig">60</span>):
+        <span class="skw">click</span>(clickimg1)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        <span class="skw">type</span>(str1)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+        <span class="kw">return</span> True
 </pre>
 </body>
 </html>

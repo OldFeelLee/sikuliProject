@@ -10,6 +10,10 @@ def click_click(img1,img2):
     click(img2)
     wait(2)
 
+def click_wait(img,waitTime):
+    click(img)
+    wait(waitTime)
+
 def click_wait_click(img1,img2,waitTime):
     click(img1)
     wait(waitTime)

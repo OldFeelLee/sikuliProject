@@ -49,7 +49,7 @@ def Restart():
 try :
     fileLog.cnt = 0
     fileLog.status = errorConst.Running  
-    fileLog.Log_flagCheck("G2WindowRestart_check",'a',errorConst.no_error)     
+    fileLog.Log_flagCheck("G2WindowRestart_0809-0813",'a',errorConst.no_error)     
     Restart()
 except FindFailed:
-    fileLog.Log_flagCheck("G2WindowRestart_check",'a',errorConst.error_1) 
+    fileLog.Log_flagCheck("G2WindowRestart_0809-0813",'a',errorConst.error_1) 

@@ -90,13 +90,13 @@
 
         fileLog.status = <span class="str">"DBExporting"</span>
     existsFunc.exists_type(Pattern(<img src="1486516821324.png" />).similar(<span class="dig">0.77</span>),Key.ENTER)
-    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    fileLog.Log(<span class="str">"DBExport_07.16-07.23"</span>,<span class="str">'a'</span>,errorConst.no_error)
     <span class="skw">wait</span>(<span class="dig">5</span>)
 <span class="kw">try</span>:
     fileLog.cnt = <span class="dig">0</span>
     fileLog.status = None
 
-    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.no_error)
+    fileLog.Log(<span class="str">"DBExport_07.16-07.23"</span>,<span class="str">'a'</span>,errorConst.no_error)
 
     <span class="kw">while</span> True :
         <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool"</span>) == False:
@@ -104,7 +104,7 @@
         DBExport()
 
 <span class="kw">except</span> FindFailed:
-    fileLog.Log(<span class="str">"DBExport_07.02-07.09"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    fileLog.Log(<span class="str">"DBExport_07.16-07.23"</span>,<span class="str">'a'</span>,errorConst.error_1)
 </pre>
 </body>
 </html>

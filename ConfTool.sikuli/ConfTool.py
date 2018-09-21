@@ -15,3 +15,8 @@ def Open():
     wait(2)
     existsFunc.whileNotExists("1524447634504.png","1524448259676.png")
     fileLog.status = None
+
+
+def deviceTab():
+    wait(2)
+    existsFunc.whileNotExists(Pattern("1536548330184.png").similar(0.91),"1536548321574.png")

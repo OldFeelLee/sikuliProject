@@ -85,6 +85,10 @@
         <span class="skw">click</span>(clickImage)
         <span class="skw">wait</span>(<span class="dig">2</span>)
 
+<span class="kw">def</span> whileNotExists_type_wait(showImage,str,waitTime):
+    <span class="kw">while</span> <span class="kw">not</span> exists(showImage):
+        <span class="skw">type</span>(str)
+        <span class="skw">wait</span>(waitTime)
 
 <span class="kw">def</span> whileNotExists_wait(showImage):
     <span class="kw">while</span> <span class="kw">not</span> exists(showImage):

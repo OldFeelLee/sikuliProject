@@ -25,7 +25,7 @@ def clipCopy():
         existsFunc.exists_click_click("1522026752652.png","1522026755408.png","1522026766617.png")
         rightClick(pane)
         clickFunc.click_wait_click("1522031018067.png","1522031028264.png",5)
-        fileLog.Log("clipCopy_03.26-04.02",'a',errorConst.no_error)  
+        fileLog.Log("clipCopy_09.17-09.27",'a',errorConst.no_error)  
         wait(30)
         clipCount=clipCount +1
         if clipCount>=60:            
@@ -42,4 +42,4 @@ try:
     fileLog.status = None   
     clipCopy()    
 except FindFailed:
-    fileLog.Log("clipCopy_03.26-04.02",'a',errorConst.error_1) 
+    fileLog.Log("clipCopy_09.17-09.27",'a',errorConst.error_1) 

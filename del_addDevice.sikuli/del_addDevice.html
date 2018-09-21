@@ -1,0 +1,138 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>del_addDevice.sikuli</h2> <a href="del_addDevice.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> datetime
+<span class="kw">import</span> string
+<span class="kw">import</span> errorConst
+<span class="kw">import</span> fileLog
+<span class="kw">import</span> clickFunc
+<span class="kw">import</span> existsFunc
+<span class="kw">import</span> ConfTool
+<span class="kw">import</span> os
+<span class="kw">import</span> typeFunc
+<span class="kw">import</span> runningCheck
+
+
+<span class="kw">def</span> del_addDevice():
+    clickFunc.click_click_click(<img src="1536543576750.png" />,Pattern(<img src="1536543590934.png" />).targetOffset(<span class="dig">90</span>,-<span class="dig">4</span>),<img src="1536543616554.png" />)
+    clickFunc.click_click(Pattern(<img src="1536543900834.png" />).similar(<span class="dig">0.92</span>).targetOffset(<span class="dig">54</span>,-<span class="dig">4</span>),<img src="1536543918591.png" />)
+    deviceScanCheck()
+
+<span class="kw">def</span> addDevice():
+    clickFunc.click_click(<img src="1536542513998.png" />,Pattern(<img src="1536542583611.png" />).similar(<span class="dig">0.97</span>).targetOffset(<span class="dig">41</span>,-<span class="dig">10</span>))
+    <span class="kw">if</span> flagCheck == <span class="dig">0</span>:
+        typeFunc.type_type_type(Key.TAB,Key.UP,Key.UP)
+        typeFunc.type_type(Key.DOWN,Key.DOWN)
+    <span class="kw">else</span> :
+        <span class="skw">type</span>(Key.TAB)
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+    typeFunc.type_type(Key.TAB,<span class="str">'10.0.127.35'</span>)
+    typeFunc.type_type_type(Key.TAB,Key.TAB,Key.TAB)
+    deviceScanCheck()
+
+<span class="kw">def</span> deviceScanCheck():
+    existsFunc.whileNotExists_type_wait(Pattern(<img src="1536543140085.png" />).targetOffset(-<span class="dig">39</span>,<span class="dig">5</span>),Key.SPACE,<span class="dig">30</span>)
+
+<span class="cmt">#    if typeFunc.type_existsClick(Key.SPACE, 30, Pattern("1536543140085.png").targetOffset(-39,5)) == True: </span>
+    clickFunc.click_click(Pattern(<img src="1536543140085.png" />).targetOffset(-<span class="dig">39</span>,<span class="dig">5</span>),<img src="1536543204973.png" />)
+    <span class="kw">if</span> typeFunc.type_existsClick(<span class="str">'admin'</span>+Key.ENTER,<span class="dig">10</span>,Pattern(<img src="1536543327921.png" />).similar(<span class="dig">0.92</span>)) == True:
+        clickFunc.click_wait(<img src="1536543370916.png" />,<span class="dig">30</span>)
+    <span class="kw">else</span>:
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">wait</span>(<span class="dig">10</span>)
+        clickFunc.click_wait(<img src="1536543370916.png" />,<span class="dig">30</span>)
+
+
+
+<span class="kw">try</span>:
+    <span class="kw">global</span> flagCheck
+    fileLog.cnt = <span class="dig">0</span>
+    fileLog.status = None
+    flagCheck = <span class="dig">0</span>
+    <span class="kw">while</span> True:
+        <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool.exe"</span>) == False:
+            ConfTool.Open()
+            ConfTool.deviceTab()
+            addDevice()
+            flagCheck = <span class="dig">1</span>
+        <span class="kw">else</span>:
+            ConfTool.deviceTab()
+            addDevice()
+        del_addDevice()
+        fileLog.Log(<span class="str">"deviceDel_Admin_09.10-09.17"</span>,<span class="str">'a'</span>,errorConst.no_error)
+
+<span class="kw">except</span> FindFailed:
+    fileLog.Log(<span class="str">"deviceDel_Admin_09.10-09.17"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    App.open(<span class="str">"gr1mailtest.bat"</span>)
+</pre>
+</body>
+</html>

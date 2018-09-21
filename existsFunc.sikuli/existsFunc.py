@@ -12,7 +12,11 @@ def whileNotExsits_type(showImage,clickImage,str):
         wait(2)
         click(clickImage)
         wait(2)
-        
+
+def whileNotExists_type_wait(showImage,str,waitTime):
+    while not exists(showImage):
+        type(str)
+        wait(waitTime)
 
 def whileNotExists_wait(showImage):
     while not exists(showImage):

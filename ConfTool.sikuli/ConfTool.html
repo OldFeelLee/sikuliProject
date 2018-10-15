@@ -78,9 +78,9 @@
 <span class="kw">import</span> fileLog
 <span class="kw">import</span> existsFunc
 
-<span class="kw">def</span> Open():
+<span class="kw">def</span> Open(drive):
     fileLog.status = <span class="str">"ConfToolOpen"</span>
-    App.open(<span class="str">"C:\IDIS Solution Suite\Client\G2ConfTool.exe"</span>)
+    App.open(drive+<span class="str">":\IDIS Solution Suite\Client\G2ConfTool.exe"</span>)
     <span class="skw">wait</span>(<span class="dig">5</span>)
     <span class="skw">type</span>(Key.ENTER)
     existsFunc.whileNotExsits_type(<img src="1524448236851.png" />,<img src="1524447598736.png" />,Key.ENTER)

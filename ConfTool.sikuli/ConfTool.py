@@ -6,9 +6,9 @@ import currentTime
 import fileLog
 import existsFunc
 
-def Open():
+def Open(drive):
     fileLog.status = "ConfToolOpen"
-    App.open("C:\IDIS Solution Suite\Client\G2ConfTool.exe")
+    App.open(drive+":\IDIS Solution Suite\Client\G2ConfTool.exe")
     wait(5)
     type(Key.ENTER)
     existsFunc.whileNotExsits_type("1524448236851.png","1524447598736.png",Key.ENTER)

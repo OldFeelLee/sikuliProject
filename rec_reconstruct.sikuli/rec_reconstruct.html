@@ -85,21 +85,21 @@
 <span class="kw">def</span> recSetup():
     <span class="kw">global</span> flagCheck
     fileLog.status = <span class="str">'begin'</span>
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     clickFunc.click_type(Pattern(<img src="1534728572838.png" />).targetOffset(<span class="dig">5</span>,<span class="dig">11</span>),Key.ENTER)
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     fileLog.status = <span class="str">'rec setup'</span>
     typeFunc.type_type_click(Key.RIGHT,Key.RIGHT,<img src="1535337017457.png" />)
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     fileLog.status = <span class="str">'storage setup'</span>
     existsFunc.whileNotExists_wait(Pattern(<img src="1535336548316.png" />).similar(<span class="dig">0.88</span>))
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     fileLog.status = <span class="str">'running check'</span>
     clickFunc.click_click(Pattern(<img src="1535336548316.png" />).similar(<span class="dig">0.91</span>),<img src="1535336597401.png" />)
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     fileLog.status = <span class="str">'reconstruct start'</span>
     clickFunc.click_click(Pattern(<img src="1535336611180.png" />).similar(<span class="dig">0.86</span>),<img src="1535336726754.png" />)
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+<span class="cmt">#    fileLog.Log("untilREC_reconstruct_08.27-09.03",'a',errorConst.no_error)</span>
     fileLog.status = <span class="str">'close'</span>
 
 
@@ -113,11 +113,11 @@
         <span class="kw">if</span> runningCheck.running(<span class="str">"G2ConfTool.exe"</span>) == False:
             ConfTool.Open()
         recSetup()
-        fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.no_error)
+        fileLog.Log(<span class="str">"untilREC_reconstruct_10.10-10.15"</span>,<span class="str">'a'</span>,errorConst.no_error)
 
 <span class="kw">except</span> FindFailed:
 
-    fileLog.Log(<span class="str">"untilREC_reconstruct_08.27-09.03"</span>,<span class="str">'a'</span>,errorConst.error_1)
+    fileLog.Log(<span class="str">"untilREC_reconstruct_10.10-10.15"</span>,<span class="str">'a'</span>,errorConst.error_1)
     App.open(<span class="str">"gr1mailtest.bat"</span>)
 </pre>
 </body>

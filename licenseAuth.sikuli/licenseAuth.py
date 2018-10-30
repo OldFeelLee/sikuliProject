@@ -53,11 +53,11 @@ try:
     Serial("serial")
     while True:
         LicenseTool()
-        fileLog.Log("LicenseAuth_06.04-06.11",'a',errorConst.no_error)
+        fileLog.Log("LicenseAuth_10.15-10.22",'a',errorConst.no_error)
         licenseDel()
 
 except FindFailed:
-    fileLog.Log("LicenseAuth_06.04-06.11",'a',errorConst.error_1)
+    fileLog.Log("LicenseAuth_10.15-10.22",'a',errorConst.error_1)
     App.open("gr1mailtest.bat")
 
  
